@@ -6,8 +6,8 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>900</width>
-    <height>600</height>
+    <width>1000</width>
+    <height>650</height>
    </rect>
   </property>
   <property name="windowTitle">
@@ -62,12 +62,12 @@
       </spacer>
      </item>
      <item>
-      <widget class="QPushButton" name="btnInvite">
+      <widget class="QPushButton" name="btnExit">
        <property name="minimumSize">
         <size><width>100</width><height>35</height></size>
        </property>
        <property name="text">
-        <string>👥 Compartir</string>
+        <string>🚪 Salir</string>
        </property>
        <property name="styleSheet">
         <string notr="true">
@@ -77,9 +77,12 @@
           border: 2px solid #FCE4EC;
           border-radius: 15px;
           font-weight: bold;
+          padding-left: 10px;
+          padding-right: 10px;
          }
          QPushButton:hover {
-          background-color: #FCE4EC;
+          background-color: #ffebee;
+          border: 2px solid #D81B60;
          }
         </string>
        </property>
@@ -135,31 +138,6 @@
            </widget>
           </item>
           <item>
-           <widget class="QFrame" name="card1">
-            <property name="styleSheet">
-             <string notr="true">
-              QFrame {
-               background-color: white;
-               border-radius: 10px;
-               border: 1px solid #FCE4EC;
-              }
-             </string>
-            </property>
-            <layout class="QVBoxLayout" name="vLayoutCard1">
-             <item>
-              <widget class="QLabel" name="txtCard1">
-               <property name="text">
-                <string>Diseñar paleta de colores</string>
-               </property>
-               <property name="wordWrap">
-                <bool>true</bool>
-               </property>
-              </widget>
-             </item>
-            </layout>
-           </widget>
-          </item>
-          <item>
            <spacer name="vSpacerTodo">
             <property name="orientation"><enum>Qt::Vertical</enum></property>
            </spacer>
@@ -212,6 +190,41 @@
           </item>
           <item>
            <spacer name="vSpacerDoing">
+            <property name="orientation"><enum>Qt::Vertical</enum></property>
+           </spacer>
+          </item>
+         </layout>
+        </widget>
+       </item>
+
+       <item>
+        <widget class="QFrame" name="colDone">
+         <property name="minimumSize">
+          <size><width>280</width><height>0</height></size>
+         </property>
+         <property name="maximumSize">
+          <size><width>280</width><height>16777215</height></size>
+         </property>
+         <property name="styleSheet">
+          <string notr="true">
+           QFrame#colDone {
+            background-color: rgba(255, 255, 255, 0.5);
+            border-radius: 15px;
+           }
+          </string>
+         </property>
+         <layout class="QVBoxLayout" name="vLayoutDone">
+          <item>
+           <widget class="QLabel" name="lblDone">
+            <property name="text"><string>✅ Realizada</string></property>
+            <property name="font">
+             <font><family>Segoe UI</family><pointsize>11</pointsize><bold>true</bold></font>
+            </property>
+            <property name="styleSheet"><string notr="true">color: #2E7D32; padding: 5px;</string></property>
+           </widget>
+          </item>
+          <item>
+           <spacer name="vSpacerDone">
             <property name="orientation"><enum>Qt::Vertical</enum></property>
            </spacer>
           </item>
