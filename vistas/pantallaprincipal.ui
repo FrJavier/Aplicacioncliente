@@ -11,7 +11,7 @@
    </rect>
   </property>
   <property name="windowTitle">
-   <string>Planner Pink</string>
+   <string>Planner Pink - Dashboard</string>
   </property>
   <property name="styleSheet">
    <string notr="true">QMainWindow {
@@ -177,7 +177,7 @@ QPushButton:hover {
 }</string>
          </property>
          <property name="text">
-          <string>📋  Mostrar proyectos</string>
+          <string>📋  Tablero Kanban</string>
          </property>
         </widget>
        </item>
@@ -212,7 +212,7 @@ QPushButton:hover {
 }</string>
          </property>
          <property name="text">
-          <string>👩🏻 Asignar nuevos roles</string>
+          <string>📅  Calendario</string>
          </property>
         </widget>
        </item>
@@ -247,7 +247,7 @@ QPushButton:hover {
 }</string>
          </property>
          <property name="text">
-          <string>➕ Añadir proyecto</string>
+          <string>⚙️  Configuración</string>
          </property>
         </widget>
        </item>
@@ -315,64 +315,369 @@ QPushButton:hover {
           <string notr="true">color: #666;</string>
          </property>
          <property name="text">
-          <string>Estas son tus tareas pendientes para hoy:</string>
+          <string>Estas son tus tareas pendientes por prioridad:</string>
          </property>
         </widget>
        </item>
        <item>
-        <widget class="QListWidget" name="listWidgetTasks">
-         <property name="font">
-          <font>
-           <family>Segoe UI</family>
-           <pointsize>10</pointsize>
-          </font>
-         </property>
+        <widget class="QScrollArea" name="scrollAreaTasks">
          <property name="styleSheet">
-          <string notr="true">QListWidget {
-	background-color: white;
-	border: 1px solid #FCE4EC;
-	border-radius: 15px;
-	padding: 10px;
-	outline: none;
-}
-QListWidget::item {
-	padding: 15px;
-	border-bottom: 1px solid #F0F0F0;
-	margin-bottom: 5px;
-	color: #333;
-}
-QListWidget::item:selected {
-	background-color: #FCE4EC;
-	color: #D81B60;
-	border-radius: 10px;
+          <string notr="true">QScrollArea {
 	border: none;
+	background-color: transparent;
+}
+QWidget#scrollAreaWidgetContents {
+	background-color: transparent;
 }</string>
          </property>
-         <item>
-          <property name="text">
-           <string>📌  Comprar materiales de oficina - 10:00 AM</string>
+         <property name="widgetResizable">
+          <bool>true</bool>
+         </property>
+         <widget class="QWidget" name="scrollAreaWidgetContents">
+          <property name="geometry">
+           <rect>
+            <x>0</x>
+            <y>0</y>
+            <width>697</width>
+            <height>407</height>
+           </rect>
           </property>
-         </item>
-         <item>
-          <property name="text">
-           <string>🎨  Diseñar mockup de la App - 12:30 PM</string>
-          </property>
-         </item>
-         <item>
-          <property name="text">
-           <string>📞  Llamar al cliente (Reunión mensual) - 16:00 PM</string>
-          </property>
-         </item>
-         <item>
-          <property name="text">
-           <string>🧘‍♀️  Clase de Yoga - 19:00 PM</string>
-          </property>
-         </item>
+          <layout class="QVBoxLayout" name="verticalLayout_tasks">
+           <property name="spacing">
+            <number>15</number>
+           </property>
+           <item>
+            <widget class="QFrame" name="task_high_priority">
+             <property name="minimumSize">
+              <size>
+               <width>0</width>
+               <height>80</height>
+              </size>
+             </property>
+             <property name="styleSheet">
+              <string notr="true">QFrame {
+	background-color: white;
+	border-radius: 10px;
+	border-left: 8px solid #FF5252; /* ROJO */
+	border-right: 1px solid #FCE4EC;
+	border-top: 1px solid #FCE4EC;
+	border-bottom: 1px solid #FCE4EC;
+}
+QFrame:hover {
+	background-color: #FFF5F7;
+}</string>
+             </property>
+             <property name="frameShape">
+              <enum>QFrame::StyledPanel</enum>
+             </property>
+             <property name="frameShadow">
+              <enum>QFrame::Raised</enum>
+             </property>
+             <layout class="QHBoxLayout" name="horizontalLayout_3">
+              <item>
+               <layout class="QVBoxLayout" name="verticalLayout_4">
+                <item>
+                 <widget class="QLabel" name="lbl_task1">
+                  <property name="font">
+                   <font>
+                    <family>Segoe UI</family>
+                    <pointsize>11</pointsize>
+                    <weight>75</weight>
+                    <bold>true</bold>
+                   </font>
+                  </property>
+                  <property name="styleSheet">
+                   <string notr="true">border: none; background: transparent; color: #333;</string>
+                  </property>
+                  <property name="text">
+                   <string>⚠️ Error crítico en servidor de producción</string>
+                  </property>
+                 </widget>
+                </item>
+                <item>
+                 <widget class="QLabel" name="lbl_time1">
+                  <property name="styleSheet">
+                   <string notr="true">border: none; background: transparent; color: #888;</string>
+                  </property>
+                  <property name="text">
+                   <string>Vence: Hoy, 12:00 PM</string>
+                  </property>
+                 </widget>
+                </item>
+               </layout>
+              </item>
+              <item>
+               <widget class="QLabel" name="tag_urgent">
+                <property name="maximumSize">
+                 <size>
+                  <width>80</width>
+                  <height>30</height>
+                 </size>
+                </property>
+                <property name="font">
+                 <font>
+                  <weight>75</weight>
+                  <bold>true</bold>
+                 </font>
+                </property>
+                <property name="styleSheet">
+                 <string notr="true">background-color: #FFEBEE; color: #D32F2F; border: none; border-radius: 5px; padding: 5px;</string>
+                </property>
+                <property name="text">
+                 <string>ALTA</string>
+                </property>
+                <property name="alignment">
+                 <set>Qt::AlignCenter</set>
+                </property>
+               </widget>
+              </item>
+             </layout>
+            </widget>
+           </item>
+           <item>
+            <widget class="QFrame" name="task_med_priority">
+             <property name="minimumSize">
+              <size>
+               <width>0</width>
+               <height>80</height>
+              </size>
+             </property>
+             <property name="styleSheet">
+              <string notr="true">QFrame {
+	background-color: white;
+	border-radius: 10px;
+	border-left: 8px solid #FFD740; /* AMARILLO */
+	border-right: 1px solid #FCE4EC;
+	border-top: 1px solid #FCE4EC;
+	border-bottom: 1px solid #FCE4EC;
+}
+QFrame:hover {
+	background-color: #FFFDE7;
+}</string>
+             </property>
+             <property name="frameShape">
+              <enum>QFrame::StyledPanel</enum>
+             </property>
+             <property name="frameShadow">
+              <enum>QFrame::Raised</enum>
+             </property>
+             <layout class="QHBoxLayout" name="horizontalLayout_4">
+              <item>
+               <layout class="QVBoxLayout" name="verticalLayout_5">
+                <item>
+                 <widget class="QLabel" name="lbl_task2">
+                  <property name="font">
+                   <font>
+                    <family>Segoe UI</family>
+                    <pointsize>11</pointsize>
+                    <weight>75</weight>
+                    <bold>true</bold>
+                   </font>
+                  </property>
+                  <property name="styleSheet">
+                   <string notr="true">border: none; background: transparent; color: #333;</string>
+                  </property>
+                  <property name="text">
+                   <string>📝 Revisar propuesta de diseño UI</string>
+                  </property>
+                 </widget>
+                </item>
+                <item>
+                 <widget class="QLabel" name="lbl_time2">
+                  <property name="styleSheet">
+                   <string notr="true">border: none; background: transparent; color: #888;</string>
+                  </property>
+                  <property name="text">
+                   <string>Vence: Mañana</string>
+                  </property>
+                 </widget>
+                </item>
+               </layout>
+              </item>
+              <item>
+               <widget class="QLabel" name="tag_med">
+                <property name="maximumSize">
+                 <size>
+                  <width>80</width>
+                  <height>30</height>
+                 </size>
+                </property>
+                <property name="font">
+                 <font>
+                  <weight>75</weight>
+                  <bold>true</bold>
+                 </font>
+                </property>
+                <property name="styleSheet">
+                 <string notr="true">background-color: #FFF8E1; color: #FBC02D; border: none; border-radius: 5px; padding: 5px;</string>
+                </property>
+                <property name="text">
+                 <string>MEDIA</string>
+                </property>
+                <property name="alignment">
+                 <set>Qt::AlignCenter</set>
+                </property>
+               </widget>
+              </item>
+             </layout>
+            </widget>
+           </item>
+           <item>
+            <widget class="QFrame" name="task_low_priority">
+             <property name="minimumSize">
+              <size>
+               <width>0</width>
+               <height>80</height>
+              </size>
+             </property>
+             <property name="styleSheet">
+              <string notr="true">QFrame {
+	background-color: white;
+	border-radius: 10px;
+	border-left: 8px solid #69F0AE; /* VERDE */
+	border-right: 1px solid #FCE4EC;
+	border-top: 1px solid #FCE4EC;
+	border-bottom: 1px solid #FCE4EC;
+}
+QFrame:hover {
+	background-color: #E8F5E9;
+}</string>
+             </property>
+             <property name="frameShape">
+              <enum>QFrame::StyledPanel</enum>
+             </property>
+             <property name="frameShadow">
+              <enum>QFrame::Raised</enum>
+             </property>
+             <layout class="QHBoxLayout" name="horizontalLayout_5">
+              <item>
+               <layout class="QVBoxLayout" name="verticalLayout_6">
+                <item>
+                 <widget class="QLabel" name="lbl_task3">
+                  <property name="font">
+                   <font>
+                    <family>Segoe UI</family>
+                    <pointsize>11</pointsize>
+                    <weight>75</weight>
+                    <bold>true</bold>
+                   </font>
+                  </property>
+                  <property name="styleSheet">
+                   <string notr="true">border: none; background: transparent; color: #333;</string>
+                  </property>
+                  <property name="text">
+                   <string>✉️ Responder correos semanales</string>
+                  </property>
+                 </widget>
+                </item>
+                <item>
+                 <widget class="QLabel" name="lbl_time3">
+                  <property name="styleSheet">
+                   <string notr="true">border: none; background: transparent; color: #888;</string>
+                  </property>
+                  <property name="text">
+                   <string>Vence: Viernes</string>
+                  </property>
+                 </widget>
+                </item>
+               </layout>
+              </item>
+              <item>
+               <widget class="QLabel" name="tag_low">
+                <property name="maximumSize">
+                 <size>
+                  <width>80</width>
+                  <height>30</height>
+                 </size>
+                </property>
+                <property name="font">
+                 <font>
+                  <weight>75</weight>
+                  <bold>true</bold>
+                 </font>
+                </property>
+                <property name="styleSheet">
+                 <string notr="true">background-color: #E8F5E9; color: #388E3C; border: none; border-radius: 5px; padding: 5px;</string>
+                </property>
+                <property name="text">
+                 <string>BAJA</string>
+                </property>
+                <property name="alignment">
+                 <set>Qt::AlignCenter</set>
+                </property>
+               </widget>
+              </item>
+             </layout>
+            </widget>
+           </item>
+           <item>
+            <spacer name="verticalSpacer_tasks">
+             <property name="orientation">
+              <enum>Qt::Vertical</enum>
+             </property>
+             <property name="sizeHint" stdset="0">
+              <size>
+               <width>20</width>
+               <height>40</height>
+              </size>
+             </property>
+            </spacer>
+           </item>
+          </layout>
+         </widget>
         </widget>
        </item>
        <item>
         <widget class="QWidget" name="bottomBar" native="true">
-         <layout class="QHBoxLayout" name="horizontalLayout_2"/>
+         <layout class="QHBoxLayout" name="horizontalLayout_2">
+          <item>
+           <spacer name="horizontalSpacer">
+            <property name="orientation">
+             <enum>Qt::Horizontal</enum>
+            </property>
+            <property name="sizeHint" stdset="0">
+             <size>
+              <width>40</width>
+              <height>20</height>
+             </size>
+            </property>
+           </spacer>
+          </item>
+          <item>
+           <widget class="QPushButton" name="btnAdd">
+            <property name="minimumSize">
+             <size>
+              <width>150</width>
+              <height>40</height>
+             </size>
+            </property>
+            <property name="font">
+             <font>
+              <family>Segoe UI</family>
+              <pointsize>10</pointsize>
+              <weight>75</weight>
+              <bold>true</bold>
+             </font>
+            </property>
+            <property name="cursor">
+             <cursorShape>PointingHandCursor</cursorShape>
+            </property>
+            <property name="styleSheet">
+             <string notr="true">QPushButton {
+	background-color: #D81B60;
+	color: white;
+	border-radius: 20px;
+}
+QPushButton:hover {
+	background-color: #C2185B;
+}</string>
+            </property>
+            <property name="text">
+             <string>+ Nueva Tarea</string>
+            </property>
+           </widget>
+          </item>
+         </layout>
         </widget>
        </item>
       </layout>
