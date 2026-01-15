@@ -1,434 +1,691 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <ui version="4.0">
- <class>AddProjectDialog</class>
- <widget class="QDialog" name="AddProjectDialog">
+ <class>MainWindow</class>
+ <widget class="QMainWindow" name="MainWindow">
   <property name="geometry">
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>500</width>
-    <height>600</height>
+    <width>1027</width>
+    <height>685</height>
    </rect>
   </property>
   <property name="windowTitle">
-   <string>Crear Nuevo Proyecto</string>
+   <string>Planner Pink - Dashboard</string>
   </property>
   <property name="styleSheet">
-   <string notr="true">QDialog {
+   <string notr="true">QMainWindow {
 	background-color: #FFF0F5;
 }</string>
   </property>
-  <layout class="QVBoxLayout" name="verticalLayout">
-   <property name="spacing">
-    <number>20</number>
-   </property>
-   <property name="leftMargin">
-    <number>30</number>
-   </property>
-   <property name="topMargin">
-    <number>30</number>
-   </property>
-   <property name="rightMargin">
-    <number>30</number>
-   </property>
-   <property name="bottomMargin">
-    <number>30</number>
-   </property>
-   <item>
-    <widget class="QLabel" name="label_header">
-     <property name="font">
-      <font>
-       <family>Segoe UI</family>
-       <pointsize>18</pointsize>
-       <weight>75</weight>
-       <bold>true</bold>
-      </font>
-     </property>
-     <property name="styleSheet">
-      <string notr="true">color: #D81B60;</string>
-     </property>
-     <property name="text">
-      <string>✨ Nuevo Proyecto</string>
-     </property>
-     <property name="alignment">
-      <set>Qt::AlignCenter</set>
-     </property>
-    </widget>
-   </item>
-   <item>
-    <widget class="QFrame" name="form_card">
-     <property name="styleSheet">
-      <string notr="true">QFrame {
+  <widget class="QWidget" name="centralwidget">
+   <layout class="QHBoxLayout" name="horizontalLayout">
+    <property name="spacing">
+     <number>0</number>
+    </property>
+    <property name="leftMargin">
+     <number>0</number>
+    </property>
+    <property name="topMargin">
+     <number>0</number>
+    </property>
+    <property name="rightMargin">
+     <number>0</number>
+    </property>
+    <property name="bottomMargin">
+     <number>0</number>
+    </property>
+    <item>
+     <widget class="QFrame" name="sidebarFrame">
+      <property name="minimumSize">
+       <size>
+        <width>250</width>
+        <height>0</height>
+       </size>
+      </property>
+      <property name="maximumSize">
+       <size>
+        <width>250</width>
+        <height>16777215</height>
+       </size>
+      </property>
+      <property name="styleSheet">
+       <string notr="true">QFrame {
 	background-color: white;
-	border-radius: 15px;
-	border: 1px solid #FCE4EC;
+	border-right: 1px solid #E0E0E0;
 }</string>
-     </property>
-     <property name="frameShape">
-      <enum>QFrame::StyledPanel</enum>
-     </property>
-     <property name="frameShadow">
-      <enum>QFrame::Raised</enum>
-     </property>
-     <layout class="QVBoxLayout" name="verticalLayout_2">
-      <property name="spacing">
-       <number>15</number>
       </property>
-      <property name="leftMargin">
-       <number>20</number>
+      <property name="frameShape">
+       <enum>QFrame::NoFrame</enum>
       </property>
-      <property name="topMargin">
-       <number>20</number>
+      <property name="frameShadow">
+       <enum>QFrame::Raised</enum>
       </property>
-      <property name="rightMargin">
-       <number>20</number>
-      </property>
-      <property name="bottomMargin">
-       <number>20</number>
-      </property>
-      <item>
-       <widget class="QLabel" name="lbl_name">
-        <property name="font">
-         <font>
-          <family>Segoe UI</family>
-          <pointsize>10</pointsize>
-          <weight>75</weight>
-          <bold>true</bold>
-         </font>
-        </property>
-        <property name="styleSheet">
-         <string notr="true">color: #555; border: none;</string>
-        </property>
-        <property name="text">
-         <string>Nombre del Proyecto</string>
-        </property>
-       </widget>
-      </item>
-      <item>
-       <widget class="QLineEdit" name="input_name">
-        <property name="minimumSize">
-         <size>
-          <width>0</width>
-          <height>40</height>
-         </size>
-        </property>
-        <property name="font">
-         <font>
-          <family>Segoe UI</family>
-          <pointsize>10</pointsize>
-         </font>
-        </property>
-        <property name="styleSheet">
-         <string notr="true">QLineEdit {
-	border: 1px solid #E0E0E0;
-	border-radius: 10px;
-	padding-left: 10px;
-	background-color: #FAFAFA;
-}
-QLineEdit:focus {
-	border: 1px solid #D81B60;
-	background-color: white;
-}</string>
-        </property>
-        <property name="placeholderText">
-         <string>Ej: Lanzamiento Marketing 2024...</string>
-        </property>
-       </widget>
-      </item>
-      <item>
-       <widget class="QLabel" name="lbl_desc">
-        <property name="font">
-         <font>
-          <family>Segoe UI</family>
-          <pointsize>10</pointsize>
-          <weight>75</weight>
-          <bold>true</bold>
-         </font>
-        </property>
-        <property name="styleSheet">
-         <string notr="true">color: #555; border: none;</string>
-        </property>
-        <property name="text">
-         <string>Descripción</string>
-        </property>
-       </widget>
-      </item>
-      <item>
-       <widget class="QPlainTextEdit" name="input_desc">
-        <property name="styleSheet">
-         <string notr="true">QPlainTextEdit {
-	border: 1px solid #E0E0E0;
-	border-radius: 10px;
-	padding: 10px;
-	background-color: #FAFAFA;
-}
-QPlainTextEdit:focus {
-	border: 1px solid #D81B60;
-	background-color: white;
-}</string>
-        </property>
-        <property name="placeholderText">
-         <string>Describe brevemente los objetivos del proyecto...</string>
-        </property>
-       </widget>
-      </item>
-      <item>
-       <layout class="QHBoxLayout" name="horizontalLayout_form">
-        <property name="spacing">
-         <number>15</number>
-        </property>
-        <item>
-         <layout class="QVBoxLayout" name="verticalLayout_date">
-          <property name="spacing">
-           <number>5</number>
-          </property>
-          <item>
-           <widget class="QLabel" name="lbl_date">
-            <property name="font">
-             <font>
-              <family>Segoe UI</family>
-              <pointsize>10</pointsize>
-              <weight>75</weight>
-              <bold>true</bold>
-             </font>
-            </property>
-            <property name="styleSheet">
-             <string notr="true">color: #555; border: none;</string>
-            </property>
-            <property name="text">
-             <string>Fecha Límite</string>
-            </property>
-           </widget>
-          </item>
-          <item>
-           <widget class="QDateEdit" name="input_date">
-            <property name="minimumSize">
-             <size>
-              <width>0</width>
-              <height>40</height>
-             </size>
-            </property>
-            <property name="font">
-             <font>
-              <family>Segoe UI</family>
-              <pointsize>10</pointsize>
-             </font>
-            </property>
-            <property name="styleSheet">
-             <string notr="true">QDateEdit {
-	border: 1px solid #E0E0E0;
-	border-radius: 10px;
-	padding-left: 10px;
-	background-color: #FAFAFA;
-}
-QDateEdit::drop-down {
-	subcontrol-origin: padding;
-	subcontrol-position: top right;
-	width: 25px;
-	border-left-width: 0px;
-}</string>
-            </property>
-            <property name="calendarPopup">
-             <bool>true</bool>
-            </property>
-           </widget>
-          </item>
-         </layout>
-        </item>
-        <item>
-         <layout class="QVBoxLayout" name="verticalLayout_priority">
-          <property name="spacing">
-           <number>5</number>
-          </property>
-          <item>
-           <widget class="QLabel" name="lbl_prio">
-            <property name="font">
-             <font>
-              <family>Segoe UI</family>
-              <pointsize>10</pointsize>
-              <weight>75</weight>
-              <bold>true</bold>
-             </font>
-            </property>
-            <property name="styleSheet">
-             <string notr="true">color: #555; border: none;</string>
-            </property>
-            <property name="text">
-             <string>Prioridad</string>
-            </property>
-           </widget>
-          </item>
-          <item>
-           <widget class="QComboBox" name="input_priority">
-            <property name="minimumSize">
-             <size>
-              <width>0</width>
-              <height>40</height>
-             </size>
-            </property>
-            <property name="font">
-             <font>
-              <family>Segoe UI</family>
-              <pointsize>10</pointsize>
-             </font>
-            </property>
-            <property name="styleSheet">
-             <string notr="true">QComboBox {
-	border: 1px solid #E0E0E0;
-	border-radius: 10px;
-	padding-left: 10px;
-	background-color: #FAFAFA;
-}
-QComboBox::drop-down {
-	border: none;
-}</string>
-            </property>
-            <item>
-             <property name="text">
-              <string>🔥 Alta</string>
-             </property>
-            </item>
-            <item>
-             <property name="text">
-              <string>🔵 Media</string>
-             </property>
-            </item>
-            <item>
-             <property name="text">
-              <string>🌱 Baja</string>
-             </property>
-            </item>
-           </widget>
-          </item>
-         </layout>
-        </item>
-       </layout>
-      </item>
-     </layout>
-    </widget>
-   </item>
-   <item>
-    <layout class="QHBoxLayout" name="horizontalLayout_buttons">
-     <item>
-      <spacer name="horizontalSpacer">
-       <property name="orientation">
-        <enum>Qt::Horizontal</enum>
+      <layout class="QVBoxLayout" name="verticalLayout">
+       <property name="spacing">
+        <number>15</number>
        </property>
-       <property name="sizeHint" stdset="0">
-        <size>
-         <width>40</width>
-         <height>20</height>
-        </size>
+       <property name="leftMargin">
+        <number>20</number>
        </property>
-      </spacer>
-     </item>
-     <item>
-      <widget class="QPushButton" name="btn_cancel">
-       <property name="minimumSize">
-        <size>
-         <width>100</width>
-         <height>45</height>
-        </size>
+       <property name="topMargin">
+        <number>40</number>
        </property>
-       <property name="font">
-        <font>
-         <family>Segoe UI</family>
-         <pointsize>10</pointsize>
-        </font>
+       <property name="rightMargin">
+        <number>20</number>
        </property>
-       <property name="cursor">
-        <cursorShape>PointingHandCursor</cursorShape>
+       <property name="bottomMargin">
+        <number>20</number>
        </property>
-       <property name="styleSheet">
-        <string notr="true">QPushButton {
+       <item>
+        <widget class="QLabel" name="label_logo">
+         <property name="font">
+          <font>
+           <family>Segoe UI</family>
+           <pointsize>18</pointsize>
+           <weight>75</weight>
+           <bold>true</bold>
+          </font>
+         </property>
+         <property name="styleSheet">
+          <string notr="true">color: #D81B60;</string>
+         </property>
+         <property name="text">
+          <string>🌸 MyPlanner</string>
+         </property>
+         <property name="alignment">
+          <set>Qt::AlignCenter</set>
+         </property>
+        </widget>
+       </item>
+       <item>
+        <spacer name="verticalSpacer_2">
+         <property name="orientation">
+          <enum>Qt::Vertical</enum>
+         </property>
+         <property name="sizeType">
+          <enum>QSizePolicy::Fixed</enum>
+         </property>
+         <property name="sizeHint" stdset="0">
+          <size>
+           <width>20</width>
+           <height>20</height>
+          </size>
+         </property>
+        </spacer>
+       </item>
+       <item>
+        <widget class="QPushButton" name="btn_home">
+         <property name="minimumSize">
+          <size>
+           <width>0</width>
+           <height>45</height>
+          </size>
+         </property>
+         <property name="font">
+          <font>
+           <family>Segoe UI</family>
+           <pointsize>10</pointsize>
+           <weight>75</weight>
+           <bold>true</bold>
+          </font>
+         </property>
+         <property name="cursor">
+          <cursorShape>PointingHandCursor</cursorShape>
+         </property>
+         <property name="styleSheet">
+          <string notr="true">background-color: #FCE4EC;
+color: #D81B60;
+border-radius: 10px;
+text-align: left;
+padding-left: 15px;
+border: none;</string>
+         </property>
+         <property name="text">
+          <string>🏠  Inicio</string>
+         </property>
+        </widget>
+       </item>
+       <item>
+        <widget class="QPushButton" name="btn_board">
+         <property name="minimumSize">
+          <size>
+           <width>0</width>
+           <height>45</height>
+          </size>
+         </property>
+         <property name="font">
+          <font>
+           <family>Segoe UI</family>
+           <pointsize>10</pointsize>
+          </font>
+         </property>
+         <property name="cursor">
+          <cursorShape>PointingHandCursor</cursorShape>
+         </property>
+         <property name="styleSheet">
+          <string notr="true">QPushButton {
 	background-color: transparent;
 	color: #666;
+	border-radius: 10px;
+	text-align: left;
+	padding-left: 15px;
+}
+QPushButton:hover {
+	background-color: #F5F5F5;
+	color: #D81B60;
+}</string>
+         </property>
+         <property name="text">
+          <string>📋  Tablero Kanban</string>
+         </property>
+        </widget>
+       </item>
+       <item>
+        <widget class="QPushButton" name="btn_calendar">
+         <property name="minimumSize">
+          <size>
+           <width>0</width>
+           <height>45</height>
+          </size>
+         </property>
+         <property name="font">
+          <font>
+           <family>Segoe UI</family>
+           <pointsize>10</pointsize>
+          </font>
+         </property>
+         <property name="cursor">
+          <cursorShape>PointingHandCursor</cursorShape>
+         </property>
+         <property name="styleSheet">
+          <string notr="true">QPushButton {
+	background-color: transparent;
+	color: #666;
+	border-radius: 10px;
+	text-align: left;
+	padding-left: 15px;
+}
+QPushButton:hover {
+	background-color: #F5F5F5;
+	color: #D81B60;
+}</string>
+         </property>
+         <property name="text">
+          <string>📅  Calendario</string>
+         </property>
+        </widget>
+       </item>
+       <item>
+        <widget class="QPushButton" name="btn_settings">
+         <property name="minimumSize">
+          <size>
+           <width>0</width>
+           <height>45</height>
+          </size>
+         </property>
+         <property name="font">
+          <font>
+           <family>Segoe UI</family>
+           <pointsize>10</pointsize>
+          </font>
+         </property>
+         <property name="cursor">
+          <cursorShape>PointingHandCursor</cursorShape>
+         </property>
+         <property name="styleSheet">
+          <string notr="true">QPushButton {
+	background-color: transparent;
+	color: #666;
+	border-radius: 10px;
+	text-align: left;
+	padding-left: 15px;
+}
+QPushButton:hover {
+	background-color: #F5F5F5;
+	color: #D81B60;
+}</string>
+         </property>
+         <property name="text">
+          <string>⚙️  Configuración</string>
+         </property>
+        </widget>
+       </item>
+       <item>
+        <spacer name="verticalSpacer">
+         <property name="orientation">
+          <enum>Qt::Vertical</enum>
+         </property>
+         <property name="sizeHint" stdset="0">
+          <size>
+           <width>20</width>
+           <height>40</height>
+          </size>
+         </property>
+        </spacer>
+       </item>
+      </layout>
+     </widget>
+    </item>
+    <item>
+     <widget class="QWidget" name="mainContent" native="true">
+      <layout class="QVBoxLayout" name="verticalLayout_2">
+       <property name="spacing">
+        <number>20</number>
+       </property>
+       <property name="leftMargin">
+        <number>40</number>
+       </property>
+       <property name="topMargin">
+        <number>40</number>
+       </property>
+       <property name="rightMargin">
+        <number>40</number>
+       </property>
+       <property name="bottomMargin">
+        <number>40</number>
+       </property>
+       <item>
+        <widget class="QLabel" name="label_welcome">
+         <property name="font">
+          <font>
+           <family>Segoe UI</family>
+           <pointsize>24</pointsize>
+           <weight>50</weight>
+           <bold>false</bold>
+          </font>
+         </property>
+         <property name="styleSheet">
+          <string notr="true">color: #333;</string>
+         </property>
+         <property name="text">
+          <string>Hola, &lt;b&gt;Usuario&lt;/b&gt; 👋</string>
+         </property>
+        </widget>
+       </item>
+       <item>
+        <widget class="QLabel" name="label_subtitle">
+         <property name="font">
+          <font>
+           <family>Segoe UI</family>
+           <pointsize>11</pointsize>
+          </font>
+         </property>
+         <property name="styleSheet">
+          <string notr="true">color: #666;</string>
+         </property>
+         <property name="text">
+          <string>Estas son tus tareas pendientes por prioridad:</string>
+         </property>
+        </widget>
+       </item>
+       <item>
+        <widget class="QScrollArea" name="scrollAreaTasks">
+         <property name="styleSheet">
+          <string notr="true">QScrollArea {
+	border: none;
+	background-color: transparent;
+}
+QWidget#scrollAreaWidgetContents {
+	background-color: transparent;
+}</string>
+         </property>
+         <property name="widgetResizable">
+          <bool>true</bool>
+         </property>
+         <widget class="QWidget" name="scrollAreaWidgetContents">
+          <property name="geometry">
+           <rect>
+            <x>0</x>
+            <y>0</y>
+            <width>697</width>
+            <height>407</height>
+           </rect>
+          </property>
+          <layout class="QVBoxLayout" name="verticalLayout_tasks">
+           <property name="spacing">
+            <number>15</number>
+           </property>
+           <item>
+            <widget class="QFrame" name="task_high_priority">
+             <property name="minimumSize">
+              <size>
+               <width>0</width>
+               <height>80</height>
+              </size>
+             </property>
+             <property name="styleSheet">
+              <string notr="true">QFrame {
+	background-color: white;
+	border-radius: 10px;
+	border-left: 8px solid #FF5252; /* ROJO */
+	border-right: 1px solid #FCE4EC;
+	border-top: 1px solid #FCE4EC;
+	border-bottom: 1px solid #FCE4EC;
+}
+QFrame:hover {
+	background-color: #FFF5F7;
+}</string>
+             </property>
+             <property name="frameShape">
+              <enum>QFrame::StyledPanel</enum>
+             </property>
+             <property name="frameShadow">
+              <enum>QFrame::Raised</enum>
+             </property>
+             <layout class="QHBoxLayout" name="horizontalLayout_3">
+              <item>
+               <layout class="QVBoxLayout" name="verticalLayout_4">
+                <item>
+                 <widget class="QLabel" name="lbl_task1">
+                  <property name="font">
+                   <font>
+                    <family>Segoe UI</family>
+                    <pointsize>11</pointsize>
+                    <weight>75</weight>
+                    <bold>true</bold>
+                   </font>
+                  </property>
+                  <property name="styleSheet">
+                   <string notr="true">border: none; background: transparent; color: #333;</string>
+                  </property>
+                  <property name="text">
+                   <string>⚠️ Error crítico en servidor de producción</string>
+                  </property>
+                 </widget>
+                </item>
+                <item>
+                 <widget class="QLabel" name="lbl_time1">
+                  <property name="styleSheet">
+                   <string notr="true">border: none; background: transparent; color: #888;</string>
+                  </property>
+                  <property name="text">
+                   <string>Vence: Hoy, 12:00 PM</string>
+                  </property>
+                 </widget>
+                </item>
+               </layout>
+              </item>
+              <item>
+               <widget class="QLabel" name="tag_urgent">
+                <property name="maximumSize">
+                 <size>
+                  <width>80</width>
+                  <height>30</height>
+                 </size>
+                </property>
+                <property name="font">
+                 <font>
+                  <weight>75</weight>
+                  <bold>true</bold>
+                 </font>
+                </property>
+                <property name="styleSheet">
+                 <string notr="true">background-color: #FFEBEE; color: #D32F2F; border: none; border-radius: 5px; padding: 5px;</string>
+                </property>
+                <property name="text">
+                 <string>ALTA</string>
+                </property>
+                <property name="alignment">
+                 <set>Qt::AlignCenter</set>
+                </property>
+               </widget>
+              </item>
+             </layout>
+            </widget>
+           </item>
+           <item>
+            <widget class="QFrame" name="task_med_priority">
+             <property name="minimumSize">
+              <size>
+               <width>0</width>
+               <height>80</height>
+              </size>
+             </property>
+             <property name="styleSheet">
+              <string notr="true">QFrame {
+	background-color: white;
+	border-radius: 10px;
+	border-left: 8px solid #FFD740; /* AMARILLO */
+	border-right: 1px solid #FCE4EC;
+	border-top: 1px solid #FCE4EC;
+	border-bottom: 1px solid #FCE4EC;
+}
+QFrame:hover {
+	background-color: #FFFDE7;
+}</string>
+             </property>
+             <property name="frameShape">
+              <enum>QFrame::StyledPanel</enum>
+             </property>
+             <property name="frameShadow">
+              <enum>QFrame::Raised</enum>
+             </property>
+             <layout class="QHBoxLayout" name="horizontalLayout_4">
+              <item>
+               <layout class="QVBoxLayout" name="verticalLayout_5">
+                <item>
+                 <widget class="QLabel" name="lbl_task2">
+                  <property name="font">
+                   <font>
+                    <family>Segoe UI</family>
+                    <pointsize>11</pointsize>
+                    <weight>75</weight>
+                    <bold>true</bold>
+                   </font>
+                  </property>
+                  <property name="styleSheet">
+                   <string notr="true">border: none; background: transparent; color: #333;</string>
+                  </property>
+                  <property name="text">
+                   <string>📝 Revisar propuesta de diseño UI</string>
+                  </property>
+                 </widget>
+                </item>
+                <item>
+                 <widget class="QLabel" name="lbl_time2">
+                  <property name="styleSheet">
+                   <string notr="true">border: none; background: transparent; color: #888;</string>
+                  </property>
+                  <property name="text">
+                   <string>Vence: Mañana</string>
+                  </property>
+                 </widget>
+                </item>
+               </layout>
+              </item>
+              <item>
+               <widget class="QLabel" name="tag_med">
+                <property name="maximumSize">
+                 <size>
+                  <width>80</width>
+                  <height>30</height>
+                 </size>
+                </property>
+                <property name="font">
+                 <font>
+                  <weight>75</weight>
+                  <bold>true</bold>
+                 </font>
+                </property>
+                <property name="styleSheet">
+                 <string notr="true">background-color: #FFF8E1; color: #FBC02D; border: none; border-radius: 5px; padding: 5px;</string>
+                </property>
+                <property name="text">
+                 <string>MEDIA</string>
+                </property>
+                <property name="alignment">
+                 <set>Qt::AlignCenter</set>
+                </property>
+               </widget>
+              </item>
+             </layout>
+            </widget>
+           </item>
+           <item>
+            <widget class="QFrame" name="task_low_priority">
+             <property name="minimumSize">
+              <size>
+               <width>0</width>
+               <height>80</height>
+              </size>
+             </property>
+             <property name="styleSheet">
+              <string notr="true">QFrame {
+	background-color: white;
+	border-radius: 10px;
+	border-left: 8px solid #69F0AE; /* VERDE */
+	border-right: 1px solid #FCE4EC;
+	border-top: 1px solid #FCE4EC;
+	border-bottom: 1px solid #FCE4EC;
+}
+QFrame:hover {
+	background-color: #E8F5E9;
+}</string>
+             </property>
+             <property name="frameShape">
+              <enum>QFrame::StyledPanel</enum>
+             </property>
+             <property name="frameShadow">
+              <enum>QFrame::Raised</enum>
+             </property>
+             <layout class="QHBoxLayout" name="horizontalLayout_5">
+              <item>
+               <layout class="QVBoxLayout" name="verticalLayout_6">
+                <item>
+                 <widget class="QLabel" name="lbl_task3">
+                  <property name="font">
+                   <font>
+                    <family>Segoe UI</family>
+                    <pointsize>11</pointsize>
+                    <weight>75</weight>
+                    <bold>true</bold>
+                   </font>
+                  </property>
+                  <property name="styleSheet">
+                   <string notr="true">border: none; background: transparent; color: #333;</string>
+                  </property>
+                  <property name="text">
+                   <string>✉️ Responder correos semanales</string>
+                  </property>
+                 </widget>
+                </item>
+                <item>
+                 <widget class="QLabel" name="lbl_time3">
+                  <property name="styleSheet">
+                   <string notr="true">border: none; background: transparent; color: #888;</string>
+                  </property>
+                  <property name="text">
+                   <string>Vence: Viernes</string>
+                  </property>
+                 </widget>
+                </item>
+               </layout>
+              </item>
+              <item>
+               <widget class="QLabel" name="tag_low">
+                <property name="maximumSize">
+                 <size>
+                  <width>80</width>
+                  <height>30</height>
+                 </size>
+                </property>
+                <property name="font">
+                 <font>
+                  <weight>75</weight>
+                  <bold>true</bold>
+                 </font>
+                </property>
+                <property name="styleSheet">
+                 <string notr="true">background-color: #E8F5E9; color: #388E3C; border: none; border-radius: 5px; padding: 5px;</string>
+                </property>
+                <property name="text">
+                 <string>BAJA</string>
+                </property>
+                <property name="alignment">
+                 <set>Qt::AlignCenter</set>
+                </property>
+               </widget>
+              </item>
+             </layout>
+            </widget>
+           </item>
+           <item>
+            <spacer name="verticalSpacer_tasks">
+             <property name="orientation">
+              <enum>Qt::Vertical</enum>
+             </property>
+             <property name="sizeHint" stdset="0">
+              <size>
+               <width>20</width>
+               <height>40</height>
+              </size>
+             </property>
+            </spacer>
+           </item>
+          </layout>
+         </widget>
+        </widget>
+       </item>
+       <item>
+        <widget class="QWidget" name="bottomBar" native="true">
+         <layout class="QHBoxLayout" name="horizontalLayout_2">
+          <item>
+           <spacer name="horizontalSpacer">
+            <property name="orientation">
+             <enum>Qt::Horizontal</enum>
+            </property>
+            <property name="sizeHint" stdset="0">
+             <size>
+              <width>40</width>
+              <height>20</height>
+             </size>
+            </property>
+           </spacer>
+          </item>
+          <item>
+           <widget class="QPushButton" name="btnAdd">
+            <property name="minimumSize">
+             <size>
+              <width>150</width>
+              <height>40</height>
+             </size>
+            </property>
+            <property name="font">
+             <font>
+              <family>Segoe UI</family>
+              <pointsize>10</pointsize>
+              <weight>75</weight>
+              <bold>true</bold>
+             </font>
+            </property>
+            <property name="cursor">
+             <cursorShape>PointingHandCursor</cursorShape>
+            </property>
+            <property name="styleSheet">
+             <string notr="true">QPushButton {
+	background-color: #D81B60;
+	color: white;
 	border-radius: 20px;
 }
 QPushButton:hover {
-	color: #333;
-	background-color: #F0F0F0;
-}</string>
-       </property>
-       <property name="text">
-        <string>Cancelar</string>
-       </property>
-      </widget>
-     </item>
-     <item>
-      <widget class="QPushButton" name="btn_create">
-       <property name="minimumSize">
-        <size>
-         <width>150</width>
-         <height>45</height>
-        </size>
-       </property>
-       <property name="font">
-        <font>
-         <family>Segoe UI</family>
-         <pointsize>10</pointsize>
-         <weight>75</weight>
-         <bold>true</bold>
-        </font>
-       </property>
-       <property name="cursor">
-        <cursorShape>PointingHandCursor</cursorShape>
-       </property>
-       <property name="styleSheet">
-        <string notr="true">QPushButton {
-	background-color: #D81B60;
-	color: white;
-	border-radius: 22px;
-	padding-left: 20px;
-	padding-right: 20px;
-}
-QPushButton:hover {
 	background-color: #C2185B;
-	border: 2px solid #AD1457;
 }</string>
-       </property>
-       <property name="text">
-        <string>Crear Proyecto</string>
-       </property>
-      </widget>
-     </item>
-    </layout>
-   </item>
-  </layout>
+            </property>
+            <property name="text">
+             <string>+ Nueva Tarea</string>
+            </property>
+           </widget>
+          </item>
+         </layout>
+        </widget>
+       </item>
+      </layout>
+     </widget>
+    </item>
+   </layout>
+  </widget>
  </widget>
  <resources/>
- <connections>
-  <connection>
-   <sender>btn_cancel</sender>
-   <signal>clicked()</signal>
-   <receiver>AddProjectDialog</receiver>
-   <slot>reject()</slot>
-   <hints>
-    <hint type="sourcelabel">
-     <x>326</x>
-     <y>555</y>
-    </hint>
-    <hint type="destinationlabel">
-     <x>249</x>
-     <y>299</y>
-    </hint>
-   </hints>
-  </connection>
-  <connection>
-   <sender>btn_create</sender>
-   <signal>clicked()</signal>
-   <receiver>AddProjectDialog</receiver>
-   <slot>accept()</slot>
-   <hints>
-    <hint type="sourcelabel">
-     <x>440</x>
-     <y>555</y>
-    </hint>
-    <hint type="destinationlabel">
-     <x>249</x>
-     <y>299</y>
-    </hint>
-   </hints>
-  </connection>
- </connections>
+ <connections/>
 </ui>
