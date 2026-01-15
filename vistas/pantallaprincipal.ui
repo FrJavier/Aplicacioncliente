@@ -177,7 +177,7 @@ QPushButton:hover {
 }</string>
          </property>
          <property name="text">
-          <string>📋  Tablero Kanban</string>
+          <string>📋  Crear nuevo table</string>
          </property>
         </widget>
        </item>
@@ -212,7 +212,7 @@ QPushButton:hover {
 }</string>
          </property>
          <property name="text">
-          <string>📅  Calendario</string>
+          <string>👩🏻 Asignar nuevos roles</string>
          </property>
         </widget>
        </item>
@@ -247,7 +247,7 @@ QPushButton:hover {
 }</string>
          </property>
          <property name="text">
-          <string>⚙️  Configuración</string>
+          <string>➕ Añadir proyecto</string>
          </property>
         </widget>
        </item>
