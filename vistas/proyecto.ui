@@ -1,19 +1,233 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <ui version="4.0">
- <class>Form</class>
- <widget class="QWidget" name="Form">
+ <class>ProjectView</class>
+ <widget class="QWidget" name="ProjectView">
   <property name="geometry">
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>400</width>
-    <height>300</height>
+    <width>900</width>
+    <height>600</height>
    </rect>
   </property>
   <property name="windowTitle">
-   <string>Form</string>
+   <string>Tablero de Proyecto</string>
   </property>
+  <property name="styleSheet">
+   <string notr="true">QWidget#ProjectView {
+    background-color: #FFF0F5;
+}</string>
+  </property>
+  <layout class="QVBoxLayout" name="mainLayout">
+   <property name="spacing">
+    <number>20</number>
+   </property>
+   <property name="leftMargin">
+    <number>30</number>
+   </property>
+   <property name="topMargin">
+    <number>30</number>
+   </property>
+   <property name="rightMargin">
+    <number>30</number>
+   </property>
+   <property name="bottomMargin">
+    <number>30</number>
+   </property>
+   <item>
+    <layout class="QHBoxLayout" name="headerLayout">
+     <item>
+      <widget class="QLabel" name="lblProjectTitle">
+       <property name="font">
+        <font>
+         <family>Segoe UI</family>
+         <pointsize>20</pointsize>
+         <weight>75</weight>
+         <bold>true</bold>
+        </font>
+       </property>
+       <property name="text">
+        <string>✨ Mi Proyecto Mágico</string>
+       </property>
+       <property name="styleSheet">
+        <string notr="true">color: #333;</string>
+       </property>
+      </widget>
+     </item>
+     <item>
+      <spacer name="horizontalSpacer">
+       <property name="orientation">
+        <enum>Qt::Horizontal</enum>
+       </property>
+      </spacer>
+     </item>
+     <item>
+      <widget class="QPushButton" name="btnInvite">
+       <property name="minimumSize">
+        <size><width>100</width><height>35</height></size>
+       </property>
+       <property name="text">
+        <string>👥 Compartir</string>
+       </property>
+       <property name="styleSheet">
+        <string notr="true">
+         QPushButton {
+          background-color: white;
+          color: #D81B60;
+          border: 2px solid #FCE4EC;
+          border-radius: 15px;
+          font-weight: bold;
+         }
+         QPushButton:hover {
+          background-color: #FCE4EC;
+         }
+        </string>
+       </property>
+      </widget>
+     </item>
+    </layout>
+   </item>
+   <item>
+    <widget class="QScrollArea" name="scrollArea">
+     <property name="widgetResizable">
+      <bool>true</bool>
+     </property>
+     <property name="frameShape">
+      <enum>QFrame::NoFrame</enum>
+     </property>
+     <property name="styleSheet">
+      <string notr="true">background: transparent;</string>
+     </property>
+     <widget class="QWidget" name="scrollAreaWidgetContents">
+      <layout class="QHBoxLayout" name="columnsLayout">
+       <property name="spacing">
+        <number>15</number>
+       </property>
+       
+       <item>
+        <widget class="QFrame" name="colTodo">
+         <property name="minimumSize">
+          <size><width>280</width><height>0</height></size>
+         </property>
+         <property name="maximumSize">
+          <size><width>280</width><height>16777215</height></size>
+         </property>
+         <property name="styleSheet">
+          <string notr="true">
+           QFrame#colTodo {
+            background-color: rgba(255, 255, 255, 0.5);
+            border-radius: 15px;
+           }
+          </string>
+         </property>
+         <layout class="QVBoxLayout" name="vLayoutTodo">
+          <item>
+           <widget class="QLabel" name="lblTodo">
+            <property name="text">
+             <string>🌸 Pendientes</string>
+            </property>
+            <property name="font">
+             <font><family>Segoe UI</family><pointsize>11</pointsize><bold>true</bold></font>
+            </property>
+            <property name="styleSheet">
+             <string notr="true">color: #D81B60; padding: 5px;</string>
+            </property>
+           </widget>
+          </item>
+          <item>
+           <widget class="QFrame" name="card1">
+            <property name="styleSheet">
+             <string notr="true">
+              QFrame {
+               background-color: white;
+               border-radius: 10px;
+               border: 1px solid #FCE4EC;
+              }
+             </string>
+            </property>
+            <layout class="QVBoxLayout" name="vLayoutCard1">
+             <item>
+              <widget class="QLabel" name="txtCard1">
+               <property name="text">
+                <string>Diseñar paleta de colores</string>
+               </property>
+               <property name="wordWrap">
+                <bool>true</bool>
+               </property>
+              </widget>
+             </item>
+            </layout>
+           </widget>
+          </item>
+          <item>
+           <spacer name="vSpacerTodo">
+            <property name="orientation"><enum>Qt::Vertical</enum></property>
+           </spacer>
+          </item>
+          <item>
+           <widget class="QPushButton" name="btnAddTodo">
+            <property name="text"><string>+ Añadir tarea</string></property>
+            <property name="styleSheet">
+             <string notr="true">
+              QPushButton {
+               border: none;
+               color: #D81B60;
+               text-align: left;
+               padding: 5px;
+              }
+              QPushButton:hover { color: #C2185B; }
+             </string>
+            </property>
+           </widget>
+          </item>
+         </layout>
+        </widget>
+       </item>
+
+       <item>
+        <widget class="QFrame" name="colDoing">
+         <property name="minimumSize">
+          <size><width>280</width><height>0</height></size>
+         </property>
+         <property name="maximumSize">
+          <size><width>280</width><height>16777215</height></size>
+         </property>
+         <property name="styleSheet">
+          <string notr="true">
+           QFrame#colDoing {
+            background-color: rgba(255, 255, 255, 0.5);
+            border-radius: 15px;
+           }
+          </string>
+         </property>
+         <layout class="QVBoxLayout" name="vLayoutDoing">
+          <item>
+           <widget class="QLabel" name="lblDoing">
+            <property name="text"><string>✨ En curso</string></property>
+            <property name="font">
+             <font><family>Segoe UI</family><pointsize>11</pointsize><bold>true</bold></font>
+            </property>
+            <property name="styleSheet"><string notr="true">color: #D81B60; padding: 5px;</string></property>
+           </widget>
+          </item>
+          <item>
+           <spacer name="vSpacerDoing">
+            <property name="orientation"><enum>Qt::Vertical</enum></property>
+           </spacer>
+          </item>
+         </layout>
+        </widget>
+       </item>
+
+       <item>
+        <spacer name="horizontalSpacer_2">
+         <property name="orientation"><enum>Qt::Horizontal</enum></property>
+        </spacer>
+       </item>
+      </layout>
+     </widget>
+    </widget>
+   </item>
+  </layout>
  </widget>
- <resources/>
- <connections/>
 </ui>
