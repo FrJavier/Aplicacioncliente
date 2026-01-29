@@ -73,17 +73,18 @@ class ControladorProyecto(QWidget):
                 self.vLayoutDone.insertWidget(1, widget)
 
     def limpiar_columna(self, layout):
-        """elimina solo los widgets QFrame (tareas) de la columna, no los titulos"""
+        """elimina solo los widgets QFrame (tareas) de la columna, no los titulos (QLabel)"""
+        from PyQt5.QtWidgets import QLabel
+        
         # recorre de atras hacia adelante para evitar problemas de indices
         i = layout.count() - 1
         while i >= 0:
             item = layout.itemAt(i)
             if item is not None and item.widget() is not None:
                 widget = item.widget()
-                # solo elimina si es un QFrame y no es una columna principal
-                nombre = widget.objectName()
-                es_columna = nombre in ["colTodo", "colDoing", "colDone"]
-                if isinstance(widget, QFrame) and not es_columna:
+                # solo elimina si es un QFrame pero NO es un QLabel (los titulos)
+                es_label = isinstance(widget, QLabel)
+                if isinstance(widget, QFrame) and not es_label:
                     layout.takeAt(i)
                     widget.deleteLater()
             i = i - 1
