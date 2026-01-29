@@ -81,6 +81,9 @@ class ProyectoController(QWidget):
 
     def crear_widget_tarea(self, tarea):
         """crea widget visual para una tarea"""
+        # guarda el id para evitar problemas con lambda
+        tarea_id = tarea.get("id")
+
         # colores segun prioridad
         colores = {"alta": "#FF5252", "media": "#FFD740", "baja": "#69F0AE"}
         color = colores.get(tarea.get("prioridad", "media"), "#FFD740")
@@ -114,10 +117,10 @@ class ProyectoController(QWidget):
 
         if estado == "pendiente":
             btn_accion = QPushButton("Iniciar")
-            btn_accion.clicked.connect(lambda: self.mover_tarea(tarea, "en_curso"))
+            btn_accion.clicked.connect(lambda checked, tid=tarea_id: self.mover_tarea(tid, "en_curso"))
         elif estado == "en_curso":
             btn_accion = QPushButton("Completar")
-            btn_accion.clicked.connect(lambda: self.mover_tarea(tarea, "completada"))
+            btn_accion.clicked.connect(lambda checked, tid=tarea_id: self.mover_tarea(tid, "completada"))
         else:
             btn_accion = None
 
@@ -145,7 +148,7 @@ class ProyectoController(QWidget):
             }
             QPushButton:hover { color: #D32F2F; }
         """)
-        btn_eliminar.clicked.connect(lambda: self.borrar_tarea(tarea))
+        btn_eliminar.clicked.connect(lambda checked, tid=tarea_id: self.borrar_tarea(tid))
 
         btn_layout.addWidget(btn_eliminar)
         btn_layout.addStretch()
@@ -155,14 +158,14 @@ class ProyectoController(QWidget):
 
         return frame
 
-    def mover_tarea(self, tarea, nuevo_estado):
+    def mover_tarea(self, tarea_id, nuevo_estado):
         """cambia el estado de una tarea"""
-        cambiar_estado_tarea(self.datos, tarea.get("id"), nuevo_estado)
+        cambiar_estado_tarea(self.datos, tarea_id, nuevo_estado)
         self.cargar_tareas()
 
-    def borrar_tarea(self, tarea):
+    def borrar_tarea(self, tarea_id):
         """elimina una tarea (la manda a papelera)"""
-        eliminar_tarea(self.datos, tarea.get("id"))
+        eliminar_tarea(self.datos, tarea_id)
         self.cargar_tareas()
 
     def agregar_tarea(self):

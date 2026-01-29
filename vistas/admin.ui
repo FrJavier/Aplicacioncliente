@@ -176,6 +176,31 @@ QPushButton:hover { color: #D32F2F; border-color: #D32F2F; }
           </widget>
          </item>
          <item>
+          <widget class="QPushButton" name="btnHacerAdmin">
+           <property name="minimumSize">
+            <size>
+             <width>0</width>
+             <height>40</height>
+            </size>
+           </property>
+           <property name="styleSheet">
+            <string notr="true">
+QPushButton {
+    background-color: transparent;
+    color: #666;
+    border: 1px solid #CCC;
+    border-radius: 20px;
+    padding: 0 20px;
+}
+QPushButton:hover { color: #D81B60; border-color: #D81B60; }
+            </string>
+           </property>
+           <property name="text">
+            <string>Cambiar Rol</string>
+           </property>
+          </widget>
+         </item>
+         <item>
           <spacer name="spacerUsuarios">
            <property name="orientation">
             <enum>Qt::Horizontal</enum>

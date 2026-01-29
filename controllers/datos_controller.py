@@ -75,6 +75,17 @@ def es_admin(datos, usuario):
     return False
 
 
+def cambiar_rol_usuario(datos, usuario, nuevo_rol):
+    """cambia el rol de un usuario (admin o user)"""
+    if usuario == "admin":
+        return False  # no permite cambiar al admin principal
+    if usuario in datos["usuarios"]:
+        datos["usuarios"][usuario]["rol"] = nuevo_rol
+        guardar_datos(datos)
+        return True
+    return False
+
+
 # funciones para proyectos
 
 def crear_proyecto(datos, nombre, descripcion=""):

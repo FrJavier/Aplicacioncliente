@@ -5,7 +5,7 @@ controller para el panel de administracion
 from PyQt5.QtWidgets import QDialog, QLineEdit, QLabel, QVBoxLayout, QPushButton, QHBoxLayout, QMessageBox
 from PyQt5 import uic
 from controllers.datos_controller import (
-    obtener_ruta_vista, crear_usuario, eliminar_usuario,
+    obtener_ruta_vista, crear_usuario, eliminar_usuario, cambiar_rol_usuario,
     crear_proyecto, eliminar_proyecto, asignar_usuario_proyecto,
     desasignar_usuario_proyecto, guardar_datos
 )
@@ -173,6 +173,7 @@ class AdminController(QDialog):
         # conecta botones de usuarios
         self.btnNuevoUsuario.clicked.connect(self.nuevo_usuario)
         self.btnEliminarUsuario.clicked.connect(self.borrar_usuario)
+        self.btnHacerAdmin.clicked.connect(self.cambiar_rol)
 
         # conecta botones de proyectos
         self.btnNuevoProyecto.clicked.connect(self.nuevo_proyecto)
@@ -265,6 +266,34 @@ class AdminController(QDialog):
                 eliminar_usuario(self.datos, usuario)
                 self.cargar_usuarios()
                 self.cargar_combos()
+
+    def cambiar_rol(self):
+        """cambia el rol del usuario seleccionado"""
+        row = self.listaUsuarios.currentRow()
+        if row < 0:
+            QMessageBox.warning(self, "Error", "Selecciona un usuario")
+            return
+
+        usuarios = list(self.datos["usuarios"].keys())
+        if row < len(usuarios):
+            usuario = usuarios[row]
+            if usuario == "admin":
+                QMessageBox.warning(self, "Error", "No se puede cambiar el rol del admin principal")
+                return
+
+            # obtiene rol actual y lo cambia
+            rol_actual = self.datos["usuarios"][usuario]["rol"]
+            nuevo_rol = "user" if rol_actual == "admin" else "admin"
+            rol_texto = "Admin" if nuevo_rol == "admin" else "Usuario"
+
+            resp = QMessageBox.question(
+                self, "Confirmar",
+                f"Cambiar rol de '{usuario}' a {rol_texto}?",
+                QMessageBox.Yes | QMessageBox.No
+            )
+            if resp == QMessageBox.Yes:
+                cambiar_rol_usuario(self.datos, usuario, nuevo_rol)
+                self.cargar_usuarios()
 
     def nuevo_proyecto(self):
         """crea un nuevo proyecto"""

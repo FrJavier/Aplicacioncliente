@@ -31,6 +31,104 @@
       "creador": "admin"
     }
   ],
-  "tareas": [],
-  "papelera": []
+  "tareas": [
+    {
+      "id": 3,
+      "titulo": "dwad",
+      "proyecto_id": 1,
+      "proyecto_nombre": "Proyecto01",
+      "estado": "pendiente",
+      "prioridad": "media"
+    },
+    {
+      "id": 4,
+      "titulo": "dawd",
+      "proyecto_id": 1,
+      "proyecto_nombre": "Proyecto01",
+      "estado": "pendiente",
+      "prioridad": "media"
+    },
+    {
+      "id": 5,
+      "titulo": "awdawd",
+      "proyecto_id": 1,
+      "proyecto_nombre": "Proyecto01",
+      "estado": "pendiente",
+      "prioridad": "media"
+    },
+    {
+      "id": 6,
+      "titulo": "awdawd",
+      "proyecto_id": 1,
+      "proyecto_nombre": "Proyecto01",
+      "estado": "en_curso",
+      "prioridad": "media"
+    },
+    {
+      "id": 7,
+      "titulo": "awdaw",
+      "proyecto_id": 1,
+      "proyecto_nombre": "Proyecto01",
+      "estado": "completada",
+      "prioridad": "media"
+    },
+    {
+      "id": 8,
+      "titulo": "awda",
+      "proyecto_id": 1,
+      "proyecto_nombre": "Proyecto01",
+      "estado": "completada",
+      "prioridad": "media"
+    },
+    {
+      "id": 9,
+      "titulo": "awdawd",
+      "proyecto_id": 1,
+      "proyecto_nombre": "Proyecto01",
+      "estado": "pendiente",
+      "prioridad": "media"
+    },
+    {
+      "id": 10,
+      "titulo": "awdawd",
+      "proyecto_id": 1,
+      "proyecto_nombre": "Proyecto01",
+      "estado": "pendiente",
+      "prioridad": "media"
+    },
+    {
+      "id": 11,
+      "titulo": "awdawd",
+      "proyecto_id": 1,
+      "proyecto_nombre": "Proyecto01",
+      "estado": "pendiente",
+      "prioridad": "media"
+    },
+    {
+      "id": 12,
+      "titulo": "adwawdaw",
+      "proyecto_id": 1,
+      "proyecto_nombre": "Proyecto01",
+      "estado": "pendiente",
+      "prioridad": "media"
+    }
+  ],
+  "papelera": [
+    {
+      "id": 1,
+      "titulo": "Matar a morci",
+      "proyecto_id": 1,
+      "proyecto_nombre": "Proyecto01",
+      "estado": "pendiente",
+      "prioridad": "alta"
+    },
+    {
+      "id": 2,
+      "titulo": "cosas",
+      "proyecto_id": 1,
+      "proyecto_nombre": "Proyecto01",
+      "estado": "pendiente",
+      "prioridad": "alta"
+    }
+  ]
 }
