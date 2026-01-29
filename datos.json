@@ -1,0 +1,36 @@
+{
+  "usuarios": {
+    "admin": {
+      "password": "admin123",
+      "rol": "admin",
+      "nombre": "Administrador"
+    },
+    "franja": {
+      "password": "123",
+      "rol": "user",
+      "nombre": "JavierVillena"
+    },
+    "morcillona": {
+      "password": "123",
+      "rol": "user",
+      "nombre": "morcilla"
+    }
+  },
+  "proyectos": [
+    {
+      "nombre": "Proyecto01",
+      "descripcion": "sisisi",
+      "fecha_limite": "2026-01-29",
+      "prioridad": "alta",
+      "participantes": [
+        "franja",
+        "morcillona",
+        "admin"
+      ],
+      "id": 1,
+      "creador": "admin"
+    }
+  ],
+  "tareas": [],
+  "papelera": []
+}

@@ -264,6 +264,41 @@ QPushButton:hover {
          </property>
         </spacer>
        </item>
+       <item>
+        <widget class="QPushButton" name="btn_ajustes">
+         <property name="minimumSize">
+          <size>
+           <width>0</width>
+           <height>45</height>
+          </size>
+         </property>
+         <property name="font">
+          <font>
+           <family>Segoe UI</family>
+           <pointsize>10</pointsize>
+          </font>
+         </property>
+         <property name="cursor">
+          <cursorShape>PointingHandCursor</cursorShape>
+         </property>
+         <property name="styleSheet">
+          <string notr="true">QPushButton {
+	background-color: transparent;
+	color: #666;
+	border-radius: 10px;
+	text-align: left;
+	padding-left: 15px;
+}
+QPushButton:hover {
+	background-color: #F5F5F5;
+	color: #D81B60;
+}</string>
+         </property>
+         <property name="text">
+          <string>Ajustes</string>
+         </property>
+        </widget>
+       </item>
       </layout>
      </widget>
     </item>
