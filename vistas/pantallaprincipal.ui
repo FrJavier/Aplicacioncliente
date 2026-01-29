@@ -177,7 +177,7 @@ QPushButton:hover {
 }</string>
          </property>
          <property name="text">
-          <string>📋  Tablero Kanban</string>
+          <string>📋  Proyectos</string>
          </property>
         </widget>
        </item>
@@ -212,7 +212,7 @@ QPushButton:hover {
 }</string>
          </property>
          <property name="text">
-          <string>📅  Calendario</string>
+          <string>👱🏿‍♀️ Roles</string>
          </property>
         </widget>
        </item>
@@ -247,7 +247,7 @@ QPushButton:hover {
 }</string>
          </property>
          <property name="text">
-          <string>⚙️  Configuración</string>
+          <string>🗑️ Papelera</string>
          </property>
         </widget>
        </item>
@@ -339,7 +339,7 @@ QWidget#scrollAreaWidgetContents {
             <x>0</x>
             <y>0</y>
             <width>697</width>
-            <height>407</height>
+            <height>403</height>
            </rect>
           </property>
           <layout class="QVBoxLayout" name="verticalLayout_tasks">
