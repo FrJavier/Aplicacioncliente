@@ -103,9 +103,11 @@ def crear_proyecto(datos, nombre, descripcion=""):
 
 
 def eliminar_proyecto(datos, proyecto_id):
-    """elimina un proyecto y sus tareas"""
+    """elimina un proyecto, sus tareas y las tareas de papelera"""
     datos["proyectos"] = [p for p in datos["proyectos"] if p.get("id") != proyecto_id]
     datos["tareas"] = [t for t in datos["tareas"] if t.get("proyecto_id") != proyecto_id]
+    # tambien elimina las tareas de la papelera de este proyecto
+    datos["papelera"] = [t for t in datos["papelera"] if t.get("proyecto_id") != proyecto_id]
     guardar_datos(datos)
 
 
@@ -118,7 +120,11 @@ def obtener_proyecto(datos, proyecto_id):
 
 
 def obtener_proyectos_usuario(datos, usuario):
-    """obtiene los proyectos donde participa un usuario"""
+    """obtiene los proyectos donde participa un usuario (admins ven todos)"""
+    # si es admin, ve todos los proyectos
+    if es_admin(datos, usuario):
+        return datos["proyectos"].copy()
+    
     proyectos = []
     for proyecto in datos["proyectos"]:
         if usuario in proyecto.get("participantes", []):
@@ -178,16 +184,20 @@ def obtener_tareas_proyecto(datos, proyecto_id):
 
 
 def obtener_tareas_usuario(datos, usuario):
-    """obtiene las tareas de los proyectos donde participa el usuario"""
-    proyectos_ids = []
-    for proyecto in datos["proyectos"]:
-        if usuario in proyecto.get("participantes", []):
-            proyectos_ids.append(proyecto.get("id"))
+    """obtiene las tareas de los proyectos donde participa el usuario (admins ven todas)"""
+    # si es admin, ve todas las tareas
+    if es_admin(datos, usuario):
+        tareas = datos["tareas"].copy()
+    else:
+        proyectos_ids = []
+        for proyecto in datos["proyectos"]:
+            if usuario in proyecto.get("participantes", []):
+                proyectos_ids.append(proyecto.get("id"))
 
-    tareas = []
-    for tarea in datos["tareas"]:
-        if tarea.get("proyecto_id") in proyectos_ids:
-            tareas.append(tarea)
+        tareas = []
+        for tarea in datos["tareas"]:
+            if tarea.get("proyecto_id") in proyectos_ids:
+                tareas.append(tarea)
 
     # ordena por prioridad
     orden = {"alta": 0, "media": 1, "baja": 2}
@@ -217,8 +227,14 @@ def eliminar_tarea(datos, tarea_id):
 
 
 def recuperar_tarea(datos, indice):
-    """recupera una tarea de la papelera"""
+    """recupera una tarea de la papelera (solo si el proyecto existe)"""
     if 0 <= indice < len(datos["papelera"]):
+        tarea = datos["papelera"][indice]
+        # verifica que el proyecto aun existe
+        proyecto = obtener_proyecto(datos, tarea.get("proyecto_id"))
+        if proyecto is None:
+            # el proyecto fue borrado, no se puede recuperar
+            return False
         tarea = datos["papelera"].pop(indice)
         datos["tareas"].append(tarea)
         guardar_datos(datos)

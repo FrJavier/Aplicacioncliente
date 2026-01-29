@@ -114,6 +114,13 @@ QComboBox {
     border-radius: 10px;
     padding-left: 15px;
     background-color: white;
+    color: #333;
+}
+QComboBox QAbstractItemView {
+    background-color: white;
+    color: #333;
+    selection-background-color: #FCE4EC;
+    selection-color: #D81B60;
 }
       </string>
      </property>

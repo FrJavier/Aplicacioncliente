@@ -75,8 +75,14 @@ class PapeleraController(QWidget):
         """recupera tarea seleccionada"""
         row = self.listDeletedTasks.currentRow()
         if row >= 0:
-            recuperar_tarea(self.datos, row)
-            self.cargar_papelera()
+            if recuperar_tarea(self.datos, row):
+                self.cargar_papelera()
+            else:
+                QMessageBox.warning(
+                    self, "No se puede recuperar",
+                    "El proyecto de esta tarea fue eliminado.\nLa tarea no puede ser recuperada."
+                )
+                self.cargar_papelera()
 
     def eliminar(self):
         """elimina permanentemente"""

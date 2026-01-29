@@ -278,9 +278,16 @@ QDateEdit::drop-down {
 	border-radius: 10px;
 	padding-left: 10px;
 	background-color: #FAFAFA;
+	color: #333;
 }
 QComboBox::drop-down {
 	border: none;
+}
+QComboBox QAbstractItemView {
+	background-color: white;
+	color: #333;
+	selection-background-color: #FCE4EC;
+	selection-color: #D81B60;
 }</string>
             </property>
             <item>
