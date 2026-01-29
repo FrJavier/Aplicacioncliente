@@ -5,36 +5,66 @@
       "rol": "admin",
       "nombre": "Administrador"
     },
-    "franja": {
+    "roblesgg": {
       "password": "123",
       "rol": "user",
-      "nombre": "JavierVillena"
-    },
-    "morcillona": {
-      "password": "123",
-      "rol": "user",
-      "nombre": "morcilla"
+      "nombre": "Alvaro"
     }
   },
-  "proyectos": [
+  "proyectos": [],
+  "tareas": [],
+  "papelera": [
     {
-      "nombre": "Proyecto01",
-      "descripcion": "sisisi",
-      "fecha_limite": "2026-01-29",
-      "prioridad": "alta",
-      "participantes": [
-        "franja",
-        "morcillona",
-        "admin"
-      ],
       "id": 1,
-      "creador": "admin"
-    }
-  ],
-  "tareas": [
+      "titulo": "Matar a morci",
+      "proyecto_id": 1,
+      "proyecto_nombre": "Proyecto01",
+      "estado": "pendiente",
+      "prioridad": "alta"
+    },
     {
-      "id": 3,
-      "titulo": "dwad",
+      "id": 2,
+      "titulo": "cosas",
+      "proyecto_id": 1,
+      "proyecto_nombre": "Proyecto01",
+      "estado": "pendiente",
+      "prioridad": "alta"
+    },
+    {
+      "id": 12,
+      "titulo": "adwawdaw",
+      "proyecto_id": 1,
+      "proyecto_nombre": "Proyecto01",
+      "estado": "pendiente",
+      "prioridad": "media"
+    },
+    {
+      "id": 11,
+      "titulo": "awdawd",
+      "proyecto_id": 1,
+      "proyecto_nombre": "Proyecto01",
+      "estado": "pendiente",
+      "prioridad": "media"
+    },
+    {
+      "id": 10,
+      "titulo": "awdawd",
+      "proyecto_id": 1,
+      "proyecto_nombre": "Proyecto01",
+      "estado": "pendiente",
+      "prioridad": "media"
+    },
+    {
+      "id": 9,
+      "titulo": "awdawd",
+      "proyecto_id": 1,
+      "proyecto_nombre": "Proyecto01",
+      "estado": "pendiente",
+      "prioridad": "media"
+    },
+    {
+      "id": 5,
+      "titulo": "awdawd",
       "proyecto_id": 1,
       "proyecto_nombre": "Proyecto01",
       "estado": "pendiente",
@@ -49,8 +79,8 @@
       "prioridad": "media"
     },
     {
-      "id": 5,
-      "titulo": "awdawd",
+      "id": 3,
+      "titulo": "dwad",
       "proyecto_id": 1,
       "proyecto_nombre": "Proyecto01",
       "estado": "pendiente",
@@ -81,54 +111,12 @@
       "prioridad": "media"
     },
     {
-      "id": 9,
-      "titulo": "awdawd",
-      "proyecto_id": 1,
-      "proyecto_nombre": "Proyecto01",
-      "estado": "pendiente",
+      "id": 13,
+      "titulo": "prueba",
+      "proyecto_id": 2,
+      "proyecto_nombre": "Proyecto nuevo",
+      "estado": "completada",
       "prioridad": "media"
-    },
-    {
-      "id": 10,
-      "titulo": "awdawd",
-      "proyecto_id": 1,
-      "proyecto_nombre": "Proyecto01",
-      "estado": "pendiente",
-      "prioridad": "media"
-    },
-    {
-      "id": 11,
-      "titulo": "awdawd",
-      "proyecto_id": 1,
-      "proyecto_nombre": "Proyecto01",
-      "estado": "pendiente",
-      "prioridad": "media"
-    },
-    {
-      "id": 12,
-      "titulo": "adwawdaw",
-      "proyecto_id": 1,
-      "proyecto_nombre": "Proyecto01",
-      "estado": "pendiente",
-      "prioridad": "media"
-    }
-  ],
-  "papelera": [
-    {
-      "id": 1,
-      "titulo": "Matar a morci",
-      "proyecto_id": 1,
-      "proyecto_nombre": "Proyecto01",
-      "estado": "pendiente",
-      "prioridad": "alta"
-    },
-    {
-      "id": 2,
-      "titulo": "cosas",
-      "proyecto_id": 1,
-      "proyecto_nombre": "Proyecto01",
-      "estado": "pendiente",
-      "prioridad": "alta"
     }
   ]
 }

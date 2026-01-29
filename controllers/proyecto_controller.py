@@ -53,10 +53,10 @@ class ProyectoController(QWidget):
 
     def cargar_tareas(self):
         """carga las tareas en las columnas"""
-        # limpia columnas
-        self.limpiar_columna(self.vLayoutTodo, 2)
-        self.limpiar_columna(self.vLayoutDoing, 1)
-        self.limpiar_columna(self.vLayoutDone, 1)
+        # limpia columnas - elimina solo los QFrame (tareas)
+        self.limpiar_columna(self.vLayoutTodo)
+        self.limpiar_columna(self.vLayoutDoing)
+        self.limpiar_columna(self.vLayoutDone)
 
         # obtiene tareas del proyecto
         tareas = obtener_tareas_proyecto(self.datos, self.proyecto.get("id"))
@@ -72,12 +72,17 @@ class ProyectoController(QWidget):
             else:
                 self.vLayoutDone.insertWidget(1, widget)
 
-    def limpiar_columna(self, layout, desde):
-        """elimina widgets de tarea de la columna"""
-        while layout.count() > desde + 1:
-            item = layout.takeAt(desde)
-            if item.widget():
-                item.widget().deleteLater()
+    def limpiar_columna(self, layout):
+        """elimina solo los widgets QFrame (tareas) de la columna"""
+        # recorre de atras hacia adelante para evitar problemas de indices
+        for i in range(layout.count() - 1, -1, -1):
+            item = layout.itemAt(i)
+            if item and item.widget():
+                widget = item.widget()
+                # solo elimina si es un QFrame (las tareas)
+                if isinstance(widget, QFrame):
+                    layout.takeAt(i)
+                    widget.deleteLater()
 
     def crear_widget_tarea(self, tarea):
         """crea widget visual para una tarea"""
