@@ -5,14 +5,65 @@
       "rol": "admin",
       "nombre": "Administrador"
     },
-    "roblesgg": {
-      "password": "123",
+    "a": {
+      "password": "a",
       "rol": "user",
-      "nombre": "Alvaro"
+      "nombre": "a"
     }
   },
-  "proyectos": [],
-  "tareas": [],
+  "proyectos": [
+    {
+      "id": 1,
+      "nombre": "a",
+      "descripcion": "a",
+      "participantes": [
+        "a",
+        "admin"
+      ]
+    }
+  ],
+  "tareas": [
+    {
+      "id": 14,
+      "titulo": "a",
+      "proyecto_id": 1,
+      "proyecto_nombre": "a",
+      "estado": "completada",
+      "prioridad": "media"
+    },
+    {
+      "id": 15,
+      "titulo": "d",
+      "proyecto_id": 1,
+      "proyecto_nombre": "a",
+      "estado": "en_curso",
+      "prioridad": "media"
+    },
+    {
+      "id": 16,
+      "titulo": "f",
+      "proyecto_id": 1,
+      "proyecto_nombre": "a",
+      "estado": "en_curso",
+      "prioridad": "alta"
+    },
+    {
+      "id": 17,
+      "titulo": "dw",
+      "proyecto_id": 1,
+      "proyecto_nombre": "a",
+      "estado": "pendiente",
+      "prioridad": "baja"
+    },
+    {
+      "id": 6,
+      "titulo": "awdawd",
+      "proyecto_id": 1,
+      "proyecto_nombre": "Proyecto01",
+      "estado": "en_curso",
+      "prioridad": "media"
+    }
+  ],
   "papelera": [
     {
       "id": 1,
@@ -84,14 +135,6 @@
       "proyecto_id": 1,
       "proyecto_nombre": "Proyecto01",
       "estado": "pendiente",
-      "prioridad": "media"
-    },
-    {
-      "id": 6,
-      "titulo": "awdawd",
-      "proyecto_id": 1,
-      "proyecto_nombre": "Proyecto01",
-      "estado": "en_curso",
       "prioridad": "media"
     },
     {
