@@ -126,14 +126,17 @@
          <layout class="QVBoxLayout" name="vLayoutTodo">
           <item>
            <widget class="QLabel" name="lblTodo">
+            <property name="minimumSize">
+             <size><width>0</width><height>30</height></size>
+            </property>
             <property name="text">
-             <string>🌸 Pendientes</string>
+             <string>PENDIENTE</string>
             </property>
             <property name="font">
-             <font><family>Segoe UI</family><pointsize>11</pointsize><bold>true</bold></font>
+             <font><family>Segoe UI</family><pointsize>12</pointsize><bold>true</bold></font>
             </property>
             <property name="styleSheet">
-             <string notr="true">color: #D81B60; padding: 5px;</string>
+             <string notr="true">color: #D81B60; padding: 5px; background-color: transparent;</string>
             </property>
            </widget>
           </item>
@@ -181,11 +184,14 @@
          <layout class="QVBoxLayout" name="vLayoutDoing">
           <item>
            <widget class="QLabel" name="lblDoing">
-            <property name="text"><string>✨ En curso</string></property>
-            <property name="font">
-             <font><family>Segoe UI</family><pointsize>11</pointsize><bold>true</bold></font>
+            <property name="minimumSize">
+             <size><width>0</width><height>30</height></size>
             </property>
-            <property name="styleSheet"><string notr="true">color: #D81B60; padding: 5px;</string></property>
+            <property name="text"><string>EN CURSO</string></property>
+            <property name="font">
+             <font><family>Segoe UI</family><pointsize>12</pointsize><bold>true</bold></font>
+            </property>
+            <property name="styleSheet"><string notr="true">color: #D81B60; padding: 5px; background-color: transparent;</string></property>
            </widget>
           </item>
           <item>
@@ -216,11 +222,14 @@
          <layout class="QVBoxLayout" name="vLayoutDone">
           <item>
            <widget class="QLabel" name="lblDone">
-            <property name="text"><string>✅ Realizada</string></property>
-            <property name="font">
-             <font><family>Segoe UI</family><pointsize>11</pointsize><bold>true</bold></font>
+            <property name="minimumSize">
+             <size><width>0</width><height>30</height></size>
             </property>
-            <property name="styleSheet"><string notr="true">color: #2E7D32; padding: 5px;</string></property>
+            <property name="text"><string>TERMINADA</string></property>
+            <property name="font">
+             <font><family>Segoe UI</family><pointsize>12</pointsize><bold>true</bold></font>
+            </property>
+            <property name="styleSheet"><string notr="true">color: #2E7D32; padding: 5px; background-color: transparent;</string></property>
            </widget>
           </item>
           <item>

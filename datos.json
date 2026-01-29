@@ -11,7 +11,23 @@
       "nombre": "Alvaro"
     }
   },
-  "proyectos": [],
-  "tareas": [],
+  "proyectos": [
+    {
+      "id": 1,
+      "nombre": "f",
+      "descripcion": "",
+      "participantes": []
+    }
+  ],
+  "tareas": [
+    {
+      "id": 1,
+      "titulo": "d",
+      "proyecto_id": 1,
+      "proyecto_nombre": "f",
+      "estado": "pendiente",
+      "prioridad": "alta"
+    }
+  ],
   "papelera": []
 }
