@@ -212,7 +212,7 @@ QPushButton:hover {
 }</string>
          </property>
          <property name="text">
-          <string>👱🏿‍♀️ Roles</string>
+          <string>🔧 Admin</string>
          </property>
         </widget>
        </item>
