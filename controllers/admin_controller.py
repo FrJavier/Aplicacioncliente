@@ -1,5 +1,5 @@
 """
-controller para el panel de administracion
+controlador para el panel de administracion
 """
 
 from PyQt5.QtWidgets import QDialog, QLineEdit, QLabel, QVBoxLayout, QPushButton, QHBoxLayout, QMessageBox
@@ -7,11 +7,11 @@ from PyQt5 import uic
 from controllers.datos_controller import (
     obtener_ruta_vista, crear_usuario, eliminar_usuario, cambiar_rol_usuario,
     crear_proyecto, eliminar_proyecto, asignar_usuario_proyecto,
-    desasignar_usuario_proyecto, guardar_datos
+    desasignar_usuario_proyecto
 )
 
 
-class CrearUsuarioDialog(QDialog):
+class DialogoCrearUsuario(QDialog):
     """dialogo simple para crear usuario"""
 
     def __init__(self):
@@ -26,38 +26,38 @@ class CrearUsuarioDialog(QDialog):
 
         # nombre
         layout.addWidget(QLabel("Nombre:"))
-        self.input_nombre = QLineEdit()
-        self.input_nombre.setPlaceholderText("Nombre completo")
-        self.input_nombre.setMinimumHeight(35)
-        self.input_nombre.setStyleSheet(self.estilo_input())
-        layout.addWidget(self.input_nombre)
+        self.entrada_nombre = QLineEdit()
+        self.entrada_nombre.setPlaceholderText("Nombre completo")
+        self.entrada_nombre.setMinimumHeight(35)
+        self.entrada_nombre.setStyleSheet(self.estilo_entrada())
+        layout.addWidget(self.entrada_nombre)
 
         # usuario
         layout.addWidget(QLabel("Usuario:"))
-        self.input_usuario = QLineEdit()
-        self.input_usuario.setPlaceholderText("Nombre de usuario")
-        self.input_usuario.setMinimumHeight(35)
-        self.input_usuario.setStyleSheet(self.estilo_input())
-        layout.addWidget(self.input_usuario)
+        self.entrada_usuario = QLineEdit()
+        self.entrada_usuario.setPlaceholderText("Nombre de usuario")
+        self.entrada_usuario.setMinimumHeight(35)
+        self.entrada_usuario.setStyleSheet(self.estilo_entrada())
+        layout.addWidget(self.entrada_usuario)
 
-        # password
+        # contrasena
         layout.addWidget(QLabel("Contrasena:"))
-        self.input_password = QLineEdit()
-        self.input_password.setPlaceholderText("Contrasena")
-        self.input_password.setEchoMode(QLineEdit.Password)
-        self.input_password.setMinimumHeight(35)
-        self.input_password.setStyleSheet(self.estilo_input())
-        layout.addWidget(self.input_password)
+        self.entrada_contrasena = QLineEdit()
+        self.entrada_contrasena.setPlaceholderText("Contrasena")
+        self.entrada_contrasena.setEchoMode(QLineEdit.Password)
+        self.entrada_contrasena.setMinimumHeight(35)
+        self.entrada_contrasena.setStyleSheet(self.estilo_entrada())
+        layout.addWidget(self.entrada_contrasena)
 
         # botones
-        btn_layout = QHBoxLayout()
-        btn_cancelar = QPushButton("Cancelar")
-        btn_cancelar.setMinimumHeight(35)
-        btn_cancelar.clicked.connect(self.reject)
+        layout_botones = QHBoxLayout()
+        boton_cancelar = QPushButton("Cancelar")
+        boton_cancelar.setMinimumHeight(35)
+        boton_cancelar.clicked.connect(self.reject)
 
-        btn_crear = QPushButton("Crear")
-        btn_crear.setMinimumHeight(35)
-        btn_crear.setStyleSheet("""
+        boton_crear = QPushButton("Crear")
+        boton_crear.setMinimumHeight(35)
+        boton_crear.setStyleSheet("""
             QPushButton {
                 background-color: #D81B60;
                 color: white;
@@ -66,13 +66,14 @@ class CrearUsuarioDialog(QDialog):
             }
             QPushButton:hover { background-color: #C2185B; }
         """)
-        btn_crear.clicked.connect(self.accept)
+        boton_crear.clicked.connect(self.accept)
 
-        btn_layout.addWidget(btn_cancelar)
-        btn_layout.addWidget(btn_crear)
-        layout.addLayout(btn_layout)
+        layout_botones.addWidget(boton_cancelar)
+        layout_botones.addWidget(boton_crear)
+        layout.addLayout(layout_botones)
 
-    def estilo_input(self):
+    def estilo_entrada(self):
+        """devuelve el estilo para los campos de texto"""
         return """
             QLineEdit {
                 border: 1px solid #E0E0E0;
@@ -83,15 +84,14 @@ class CrearUsuarioDialog(QDialog):
         """
 
     def obtener_datos(self):
-        """retorna nombre, usuario y password"""
-        return (
-            self.input_nombre.text().strip(),
-            self.input_usuario.text().strip(),
-            self.input_password.text()
-        )
+        """devuelve nombre, usuario y contrasena"""
+        nombre = self.entrada_nombre.text().strip()
+        usuario = self.entrada_usuario.text().strip()
+        contrasena = self.entrada_contrasena.text()
+        return nombre, usuario, contrasena
 
 
-class CrearProyectoDialog(QDialog):
+class DialogoCrearProyecto(QDialog):
     """dialogo simple para crear proyecto"""
 
     def __init__(self):
@@ -106,10 +106,10 @@ class CrearProyectoDialog(QDialog):
 
         # nombre
         layout.addWidget(QLabel("Nombre del proyecto:"))
-        self.input_nombre = QLineEdit()
-        self.input_nombre.setPlaceholderText("Nombre del proyecto")
-        self.input_nombre.setMinimumHeight(35)
-        self.input_nombre.setStyleSheet("""
+        self.entrada_nombre = QLineEdit()
+        self.entrada_nombre.setPlaceholderText("Nombre del proyecto")
+        self.entrada_nombre.setMinimumHeight(35)
+        self.entrada_nombre.setStyleSheet("""
             QLineEdit {
                 border: 1px solid #E0E0E0;
                 border-radius: 8px;
@@ -117,14 +117,14 @@ class CrearProyectoDialog(QDialog):
                 background-color: white;
             }
         """)
-        layout.addWidget(self.input_nombre)
+        layout.addWidget(self.entrada_nombre)
 
         # descripcion
         layout.addWidget(QLabel("Descripcion (opcional):"))
-        self.input_desc = QLineEdit()
-        self.input_desc.setPlaceholderText("Descripcion breve")
-        self.input_desc.setMinimumHeight(35)
-        self.input_desc.setStyleSheet("""
+        self.entrada_descripcion = QLineEdit()
+        self.entrada_descripcion.setPlaceholderText("Descripcion breve")
+        self.entrada_descripcion.setMinimumHeight(35)
+        self.entrada_descripcion.setStyleSheet("""
             QLineEdit {
                 border: 1px solid #E0E0E0;
                 border-radius: 8px;
@@ -132,17 +132,17 @@ class CrearProyectoDialog(QDialog):
                 background-color: white;
             }
         """)
-        layout.addWidget(self.input_desc)
+        layout.addWidget(self.entrada_descripcion)
 
         # botones
-        btn_layout = QHBoxLayout()
-        btn_cancelar = QPushButton("Cancelar")
-        btn_cancelar.setMinimumHeight(35)
-        btn_cancelar.clicked.connect(self.reject)
+        layout_botones = QHBoxLayout()
+        boton_cancelar = QPushButton("Cancelar")
+        boton_cancelar.setMinimumHeight(35)
+        boton_cancelar.clicked.connect(self.reject)
 
-        btn_crear = QPushButton("Crear")
-        btn_crear.setMinimumHeight(35)
-        btn_crear.setStyleSheet("""
+        boton_crear = QPushButton("Crear")
+        boton_crear.setMinimumHeight(35)
+        boton_crear.setStyleSheet("""
             QPushButton {
                 background-color: #D81B60;
                 color: white;
@@ -151,18 +151,20 @@ class CrearProyectoDialog(QDialog):
             }
             QPushButton:hover { background-color: #C2185B; }
         """)
-        btn_crear.clicked.connect(self.accept)
+        boton_crear.clicked.connect(self.accept)
 
-        btn_layout.addWidget(btn_cancelar)
-        btn_layout.addWidget(btn_crear)
-        layout.addLayout(btn_layout)
+        layout_botones.addWidget(boton_cancelar)
+        layout_botones.addWidget(boton_crear)
+        layout.addLayout(layout_botones)
 
     def obtener_datos(self):
-        """retorna nombre y descripcion"""
-        return self.input_nombre.text().strip(), self.input_desc.text().strip()
+        """devuelve nombre y descripcion"""
+        nombre = self.entrada_nombre.text().strip()
+        descripcion = self.entrada_descripcion.text().strip()
+        return nombre, descripcion
 
 
-class AdminController(QDialog):
+class ControladorAdmin(QDialog):
     """maneja el panel de administracion"""
 
     def __init__(self, datos):
@@ -192,16 +194,23 @@ class AdminController(QDialog):
     def cargar_usuarios(self):
         """carga la lista de usuarios"""
         self.listaUsuarios.clear()
-        for usuario, info in self.datos["usuarios"].items():
-            rol = "Admin" if info["rol"] == "admin" else "Usuario"
-            self.listaUsuarios.addItem(f"{info['nombre']} ({usuario}) - {rol}")
+        for usuario in self.datos["usuarios"]:
+            info = self.datos["usuarios"][usuario]
+            if info["rol"] == "admin":
+                rol = "Admin"
+            else:
+                rol = "Usuario"
+            texto = info["nombre"] + " (" + usuario + ") - " + rol
+            self.listaUsuarios.addItem(texto)
 
     def cargar_proyectos(self):
         """carga la lista de proyectos"""
         self.listaProyectos.clear()
         for proyecto in self.datos["proyectos"]:
-            num_part = len(proyecto.get("participantes", []))
-            self.listaProyectos.addItem(f"{proyecto['nombre']} ({num_part} participantes)")
+            participantes = proyecto.get("participantes", [])
+            num_participantes = len(participantes)
+            texto = proyecto["nombre"] + " (" + str(num_participantes) + " participantes)"
+            self.listaProyectos.addItem(texto)
 
     def cargar_combos(self):
         """carga los combos de asignacion"""
@@ -212,29 +221,36 @@ class AdminController(QDialog):
 
         # combo de usuarios
         self.comboUsuario.clear()
-        for usuario, info in self.datos["usuarios"].items():
-            self.comboUsuario.addItem(f"{info['nombre']} ({usuario})", usuario)
+        for usuario in self.datos["usuarios"]:
+            info = self.datos["usuarios"][usuario]
+            texto = info["nombre"] + " (" + usuario + ")"
+            self.comboUsuario.addItem(texto, usuario)
 
         self.mostrar_participantes()
 
     def mostrar_participantes(self):
         """muestra los participantes del proyecto seleccionado"""
         self.listaParticipantes.clear()
-        idx = self.comboProyecto.currentIndex()
-        if idx >= 0 and idx < len(self.datos["proyectos"]):
-            proyecto = self.datos["proyectos"][idx]
-            for usuario in proyecto.get("participantes", []):
+        indice = self.comboProyecto.currentIndex()
+        
+        if indice >= 0 and indice < len(self.datos["proyectos"]):
+            proyecto = self.datos["proyectos"][indice]
+            participantes = proyecto.get("participantes", [])
+            
+            for usuario in participantes:
                 if usuario in self.datos["usuarios"]:
                     nombre = self.datos["usuarios"][usuario]["nombre"]
-                    self.listaParticipantes.addItem(f"{nombre} ({usuario})")
+                    texto = nombre + " (" + usuario + ")"
+                    self.listaParticipantes.addItem(texto)
 
     def nuevo_usuario(self):
         """crea un nuevo usuario"""
-        dialogo = CrearUsuarioDialog()
+        dialogo = DialogoCrearUsuario()
         if dialogo.exec_() == QDialog.Accepted:
-            nombre, usuario, password = dialogo.obtener_datos()
-            if nombre and usuario and password:
-                if crear_usuario(self.datos, usuario, password, nombre):
+            nombre, usuario, contrasena = dialogo.obtener_datos()
+            
+            if nombre != "" and usuario != "" and contrasena != "":
+                if crear_usuario(self.datos, usuario, contrasena, nombre):
                     self.cargar_usuarios()
                     self.cargar_combos()
                 else:
@@ -244,64 +260,71 @@ class AdminController(QDialog):
 
     def borrar_usuario(self):
         """elimina el usuario seleccionado"""
-        row = self.listaUsuarios.currentRow()
-        if row < 0:
+        fila = self.listaUsuarios.currentRow()
+        if fila < 0:
             QMessageBox.warning(self, "Error", "Selecciona un usuario")
             return
 
         # obtiene el nombre de usuario de la lista
-        usuarios = list(self.datos["usuarios"].keys())
-        if row < len(usuarios):
-            usuario = usuarios[row]
+        lista_usuarios = list(self.datos["usuarios"].keys())
+        if fila < len(lista_usuarios):
+            usuario = lista_usuarios[fila]
+            
             if usuario == "admin":
                 QMessageBox.warning(self, "Error", "No se puede eliminar al admin")
                 return
 
-            resp = QMessageBox.question(
+            respuesta = QMessageBox.question(
                 self, "Confirmar",
-                f"Eliminar usuario '{usuario}'?",
+                "Eliminar usuario '" + usuario + "'?",
                 QMessageBox.Yes | QMessageBox.No
             )
-            if resp == QMessageBox.Yes:
+            if respuesta == QMessageBox.Yes:
                 eliminar_usuario(self.datos, usuario)
                 self.cargar_usuarios()
                 self.cargar_combos()
 
     def cambiar_rol(self):
         """cambia el rol del usuario seleccionado"""
-        row = self.listaUsuarios.currentRow()
-        if row < 0:
+        fila = self.listaUsuarios.currentRow()
+        if fila < 0:
             QMessageBox.warning(self, "Error", "Selecciona un usuario")
             return
 
-        usuarios = list(self.datos["usuarios"].keys())
-        if row < len(usuarios):
-            usuario = usuarios[row]
+        lista_usuarios = list(self.datos["usuarios"].keys())
+        if fila < len(lista_usuarios):
+            usuario = lista_usuarios[fila]
+            
             if usuario == "admin":
                 QMessageBox.warning(self, "Error", "No se puede cambiar el rol del admin principal")
                 return
 
             # obtiene rol actual y lo cambia
             rol_actual = self.datos["usuarios"][usuario]["rol"]
-            nuevo_rol = "user" if rol_actual == "admin" else "admin"
-            rol_texto = "Admin" if nuevo_rol == "admin" else "Usuario"
+            if rol_actual == "admin":
+                nuevo_rol = "user"
+                rol_texto = "Usuario"
+            else:
+                nuevo_rol = "admin"
+                rol_texto = "Admin"
 
-            resp = QMessageBox.question(
+            respuesta = QMessageBox.question(
                 self, "Confirmar",
-                f"Cambiar rol de '{usuario}' a {rol_texto}?",
+                "Cambiar rol de '" + usuario + "' a " + rol_texto + "?",
                 QMessageBox.Yes | QMessageBox.No
             )
-            if resp == QMessageBox.Yes:
+            if respuesta == QMessageBox.Yes:
                 cambiar_rol_usuario(self.datos, usuario, nuevo_rol)
                 self.cargar_usuarios()
 
     def nuevo_proyecto(self):
         """crea un nuevo proyecto"""
-        dialogo = CrearProyectoDialog()
+        dialogo = DialogoCrearProyecto()
         if dialogo.exec_() == QDialog.Accepted:
-            nombre, desc = dialogo.obtener_datos()
-            if nombre:
-                crear_proyecto(self.datos, nombre, desc)
+            nombre, descripcion = dialogo.obtener_datos()
+            
+            if nombre != "":
+                crear_proyecto(self.datos, nombre, descripcion)
                 self.cargar_proyectos()
                 self.cargar_combos()
             else:
@@ -309,19 +332,19 @@ class AdminController(QDialog):
 
     def borrar_proyecto(self):
         """elimina el proyecto seleccionado"""
-        row = self.listaProyectos.currentRow()
-        if row < 0:
+        fila = self.listaProyectos.currentRow()
+        if fila < 0:
             QMessageBox.warning(self, "Error", "Selecciona un proyecto")
             return
 
-        if row < len(self.datos["proyectos"]):
-            proyecto = self.datos["proyectos"][row]
-            resp = QMessageBox.question(
+        if fila < len(self.datos["proyectos"]):
+            proyecto = self.datos["proyectos"][fila]
+            respuesta = QMessageBox.question(
                 self, "Confirmar",
-                f"Eliminar proyecto '{proyecto['nombre']}'?\nSe eliminaran todas sus tareas.",
+                "Eliminar proyecto '" + proyecto["nombre"] + "'?\nSe eliminaran todas sus tareas.",
                 QMessageBox.Yes | QMessageBox.No
             )
-            if resp == QMessageBox.Yes:
+            if respuesta == QMessageBox.Yes:
                 eliminar_proyecto(self.datos, proyecto["id"])
                 self.cargar_proyectos()
                 self.cargar_combos()
@@ -331,7 +354,7 @@ class AdminController(QDialog):
         proyecto_id = self.comboProyecto.currentData()
         usuario = self.comboUsuario.currentData()
 
-        if proyecto_id and usuario:
+        if proyecto_id is not None and usuario is not None:
             if asignar_usuario_proyecto(self.datos, usuario, proyecto_id):
                 self.mostrar_participantes()
                 self.cargar_proyectos()
@@ -343,7 +366,7 @@ class AdminController(QDialog):
         proyecto_id = self.comboProyecto.currentData()
         usuario = self.comboUsuario.currentData()
 
-        if proyecto_id and usuario:
+        if proyecto_id is not None and usuario is not None:
             if desasignar_usuario_proyecto(self.datos, usuario, proyecto_id):
                 self.mostrar_participantes()
                 self.cargar_proyectos()

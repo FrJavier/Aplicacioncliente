@@ -9,11 +9,11 @@ Credenciales admin:
 import sys
 from PyQt5.QtWidgets import QApplication, QDialog
 from controllers.datos_controller import cargar_datos
-from controllers.login_controller import LoginController
-from controllers.principal_controller import PrincipalController
+from controllers.login_controller import ControladorLogin
+from controllers.principal_controller import ControladorPrincipal
 
 
-class App:
+class Aplicacion:
     """clase principal de la aplicacion"""
 
     def __init__(self):
@@ -25,9 +25,9 @@ class App:
         """inicia la aplicacion mostrando login"""
         datos = cargar_datos()
 
-        login = LoginController(datos)
+        login = ControladorLogin(datos)
         if login.exec_() == QDialog.Accepted:
-            self.ventana = PrincipalController(
+            self.ventana = ControladorPrincipal(
                 login.usuario_logueado,
                 datos,
                 self.reiniciar
@@ -49,5 +49,5 @@ class App:
 
 
 if __name__ == "__main__":
-    aplicacion = App()
+    aplicacion = Aplicacion()
     aplicacion.ejecutar()

@@ -1,5 +1,5 @@
 """
-controller para la ventana principal
+controlador para la ventana principal
 """
 
 from PyQt5.QtWidgets import (
@@ -11,13 +11,13 @@ from PyQt5 import uic
 from controllers.datos_controller import (
     obtener_ruta_vista, es_admin, obtener_proyectos_usuario,
     obtener_tareas_usuario, obtener_proyecto, recuperar_tarea,
-    eliminar_tarea_permanente, vaciar_papelera, guardar_datos
+    eliminar_tarea_permanente, vaciar_papelera
 )
-from controllers.proyecto_controller import ProyectoController
-from controllers.admin_controller import AdminController
+from controllers.proyecto_controller import ControladorProyecto
+from controllers.admin_controller import ControladorAdmin
 
 
-class AjustesController(QDialog):
+class ControladorAjustes(QDialog):
     """dialogo de ajustes con cierre de sesion"""
 
     def __init__(self, usuario, datos):
@@ -29,28 +29,31 @@ class AjustesController(QDialog):
 
         # muestra info del usuario
         info = self.datos["usuarios"][usuario]
-        rol = "Administrador" if info["rol"] == "admin" else "Usuario"
-        self.lbl_usuario_actual.setText(f"Usuario: {usuario}")
-        self.lbl_rol.setText(f"Rol: {rol}")
+        if info["rol"] == "admin":
+            rol = "Administrador"
+        else:
+            rol = "Usuario"
+        self.lbl_usuario_actual.setText("Usuario: " + usuario)
+        self.lbl_rol.setText("Rol: " + rol)
 
         # conecta botones
-        self.btn_cerrar_sesion.clicked.connect(self.logout)
+        self.btn_cerrar_sesion.clicked.connect(self.hacer_logout)
         self.btn_volver.clicked.connect(self.reject)
 
-    def logout(self):
+    def hacer_logout(self):
         """marca cierre de sesion"""
         self.cerrar_sesion = True
         self.accept()
 
 
-class PapeleraController(QWidget):
+class ControladorPapelera(QWidget):
     """maneja la vista de papelera"""
 
-    def __init__(self, datos, on_volver):
+    def __init__(self, datos, funcion_volver):
         super().__init__()
         uic.loadUi(obtener_ruta_vista("papeleradereciclaje.ui"), self)
         self.datos = datos
-        self.on_volver = on_volver
+        self.funcion_volver = funcion_volver
 
         # conecta botones
         self.btnExit.clicked.connect(self.volver)
@@ -61,21 +64,26 @@ class PapeleraController(QWidget):
         self.cargar_papelera()
 
     def volver(self):
-        self.on_volver()
+        """vuelve a la pantalla principal"""
+        self.funcion_volver()
 
     def cargar_papelera(self):
         """carga las tareas eliminadas"""
         self.listDeletedTasks.clear()
         for tarea in self.datos["papelera"]:
-            texto = f"{tarea.get('titulo', 'Sin titulo')} - {tarea.get('proyecto_nombre', '')}"
+            titulo = tarea.get("titulo", "Sin titulo")
+            proyecto = tarea.get("proyecto_nombre", "")
+            texto = titulo + " - " + proyecto
             self.listDeletedTasks.addItem(texto)
-        self.lblStatus.setText(f"{len(self.datos['papelera'])} tareas en papelera")
+        
+        cantidad = len(self.datos["papelera"])
+        self.lblStatus.setText(str(cantidad) + " tareas en papelera")
 
     def recuperar(self):
         """recupera tarea seleccionada"""
-        row = self.listDeletedTasks.currentRow()
-        if row >= 0:
-            if recuperar_tarea(self.datos, row):
+        fila = self.listDeletedTasks.currentRow()
+        if fila >= 0:
+            if recuperar_tarea(self.datos, fila):
                 self.cargar_papelera()
             else:
                 QMessageBox.warning(
@@ -86,42 +94,42 @@ class PapeleraController(QWidget):
 
     def eliminar(self):
         """elimina permanentemente"""
-        row = self.listDeletedTasks.currentRow()
-        if row >= 0:
-            eliminar_tarea_permanente(self.datos, row)
+        fila = self.listDeletedTasks.currentRow()
+        if fila >= 0:
+            eliminar_tarea_permanente(self.datos, fila)
             self.cargar_papelera()
 
     def vaciar(self):
         """vacia la papelera"""
-        if self.datos["papelera"]:
-            resp = QMessageBox.question(
+        if len(self.datos["papelera"]) > 0:
+            respuesta = QMessageBox.question(
                 self, "Confirmar", "Vaciar papelera?",
                 QMessageBox.Yes | QMessageBox.No
             )
-            if resp == QMessageBox.Yes:
+            if respuesta == QMessageBox.Yes:
                 vaciar_papelera(self.datos)
                 self.cargar_papelera()
 
 
-class PrincipalController(QMainWindow):
+class ControladorPrincipal(QMainWindow):
     """maneja la ventana principal"""
 
-    def __init__(self, usuario, datos, on_logout):
+    def __init__(self, usuario, datos, funcion_logout):
         super().__init__()
         uic.loadUi(obtener_ruta_vista("pantallaprincipal.ui"), self)
         self.usuario = usuario
         self.datos = datos
-        self.on_logout = on_logout
+        self.funcion_logout = funcion_logout
         self.vista_actual = None
-        self.admin = es_admin(datos, usuario)
+        self.es_admin = es_admin(datos, usuario)
 
         # oculta boton admin si no es admin
-        if not self.admin:
+        if not self.es_admin:
             self.btn_calendar.hide()
 
         # saludo
         nombre = self.datos["usuarios"][usuario].get("nombre", usuario)
-        self.label_welcome.setText(f"Hola, <b>{nombre}</b>")
+        self.label_welcome.setText("Hola, <b>" + nombre + "</b>")
 
         # conecta botones sidebar
         self.btn_home.clicked.connect(self.mostrar_inicio)
@@ -141,20 +149,23 @@ class PrincipalController(QMainWindow):
         # limpia widgets existentes
         while layout.count() > 1:
             item = layout.takeAt(0)
-            if item.widget():
+            if item.widget() is not None:
                 item.widget().deleteLater()
 
         # obtiene tareas del usuario
-        tareas = obtener_tareas_usuario(self.datos, self.usuario)
+        todas_tareas = obtener_tareas_usuario(self.datos, self.usuario)
 
         # filtra solo pendientes y en curso
-        tareas = [t for t in tareas if t.get("estado") != "completada"]
+        tareas = []
+        for tarea in todas_tareas:
+            if tarea.get("estado") != "completada":
+                tareas.append(tarea)
 
-        if not tareas:
-            lbl = QLabel("No tienes tareas pendientes")
-            lbl.setStyleSheet("color: #666; font-size: 14px;")
-            lbl.setAlignment(Qt.AlignCenter)
-            layout.insertWidget(0, lbl)
+        if len(tareas) == 0:
+            etiqueta = QLabel("No tienes tareas pendientes")
+            etiqueta.setStyleSheet("color: #666; font-size: 14px;")
+            etiqueta.setAlignment(Qt.AlignCenter)
+            layout.insertWidget(0, etiqueta)
         else:
             for tarea in tareas:
                 widget = self.crear_widget_tarea(tarea)
@@ -163,7 +174,7 @@ class PrincipalController(QMainWindow):
     def crear_widget_tarea(self, tarea):
         """crea widget de tarea para inicio"""
         colores = {"alta": "#FF5252", "media": "#FFD740", "baja": "#69F0AE"}
-        tags = {
+        etiquetas = {
             "alta": ("ALTA", "#FFEBEE", "#D32F2F"),
             "media": ("MEDIA", "#FFF8E1", "#FBC02D"),
             "baja": ("BAJA", "#E8F5E9", "#388E3C")
@@ -171,65 +182,72 @@ class PrincipalController(QMainWindow):
 
         prioridad = tarea.get("prioridad", "media")
         color = colores.get(prioridad, "#FFD740")
-        tag = tags.get(prioridad, tags["media"])
+        etiqueta_info = etiquetas.get(prioridad, etiquetas["media"])
 
         frame = QFrame()
         frame.setMinimumHeight(80)
         frame.setCursor(Qt.PointingHandCursor)
-        frame.setStyleSheet(f"""
-            QFrame {{
+        frame.setStyleSheet("""
+            QFrame {
                 background-color: white;
                 border-radius: 10px;
-                border-left: 8px solid {color};
+                border-left: 8px solid """ + color + """;
                 border-right: 1px solid #FCE4EC;
                 border-top: 1px solid #FCE4EC;
                 border-bottom: 1px solid #FCE4EC;
-            }}
-            QFrame:hover {{ background-color: #FFF5F7; }}
+            }
+            QFrame:hover { background-color: #FFF5F7; }
         """)
 
-        # hace clickeable para ir al proyecto
-        frame.mousePressEvent = lambda e: self.abrir_proyecto(tarea.get("proyecto_id"))
+        # guarda el id del proyecto para usarlo al hacer click
+        proyecto_id = tarea.get("proyecto_id")
+        frame.mousePressEvent = self.crear_funcion_abrir_proyecto(proyecto_id)
 
         layout = QHBoxLayout(frame)
 
-        v_layout = QVBoxLayout()
-        lbl_titulo = QLabel(tarea.get("titulo", "Sin titulo"))
-        lbl_titulo.setStyleSheet("border: none; background: transparent; color: #333; font-weight: bold;")
+        layout_vertical = QVBoxLayout()
+        etiqueta_titulo = QLabel(tarea.get("titulo", "Sin titulo"))
+        etiqueta_titulo.setStyleSheet("border: none; background: transparent; color: #333; font-weight: bold;")
 
-        lbl_proyecto = QLabel(f"Proyecto: {tarea.get('proyecto_nombre', '')}")
-        lbl_proyecto.setStyleSheet("border: none; background: transparent; color: #888;")
+        etiqueta_proyecto = QLabel("Proyecto: " + tarea.get("proyecto_nombre", ""))
+        etiqueta_proyecto.setStyleSheet("border: none; background: transparent; color: #888;")
 
-        v_layout.addWidget(lbl_titulo)
-        v_layout.addWidget(lbl_proyecto)
+        layout_vertical.addWidget(etiqueta_titulo)
+        layout_vertical.addWidget(etiqueta_proyecto)
 
-        lbl_tag = QLabel(tag[0])
-        lbl_tag.setMaximumSize(80, 30)
-        lbl_tag.setStyleSheet(f"""
-            background-color: {tag[1]};
-            color: {tag[2]};
+        etiqueta_prioridad = QLabel(etiqueta_info[0])
+        etiqueta_prioridad.setMaximumSize(80, 30)
+        etiqueta_prioridad.setStyleSheet("""
+            background-color: """ + etiqueta_info[1] + """;
+            color: """ + etiqueta_info[2] + """;
             border: none;
             border-radius: 5px;
             padding: 5px;
             font-weight: bold;
         """)
-        lbl_tag.setAlignment(Qt.AlignCenter)
+        etiqueta_prioridad.setAlignment(Qt.AlignCenter)
 
-        layout.addLayout(v_layout)
-        layout.addWidget(lbl_tag)
+        layout.addLayout(layout_vertical)
+        layout.addWidget(etiqueta_prioridad)
 
         return frame
+
+    def crear_funcion_abrir_proyecto(self, proyecto_id):
+        """crea una funcion para abrir un proyecto"""
+        def funcion(evento):
+            self.abrir_proyecto(proyecto_id)
+        return funcion
 
     def abrir_proyecto(self, proyecto_id):
         """abre la vista de un proyecto"""
         proyecto = obtener_proyecto(self.datos, proyecto_id)
-        if proyecto:
+        if proyecto is not None:
             self.mostrar_vista_proyecto(proyecto)
 
     def mostrar_inicio(self):
         """muestra pantalla de inicio"""
         self.resaltar_boton(self.btn_home)
-        if self.vista_actual:
+        if self.vista_actual is not None:
             self.vista_actual.hide()
             self.vista_actual.deleteLater()
             self.vista_actual = None
@@ -246,7 +264,7 @@ class PrincipalController(QMainWindow):
         # obtiene proyectos del usuario
         proyectos = obtener_proyectos_usuario(self.datos, self.usuario)
 
-        if not proyectos:
+        if len(proyectos) == 0:
             QMessageBox.information(
                 self, "Sin proyectos",
                 "No estas asignado a ningun proyecto.\nContacta al administrador."
@@ -290,9 +308,9 @@ class PrincipalController(QMainWindow):
 
         layout.addWidget(lista)
 
-        btn_abrir = QPushButton("Abrir Proyecto")
-        btn_abrir.setMinimumHeight(40)
-        btn_abrir.setStyleSheet("""
+        boton_abrir = QPushButton("Abrir Proyecto")
+        boton_abrir.setMinimumHeight(40)
+        boton_abrir.setStyleSheet("""
             QPushButton {
                 background-color: #D81B60;
                 color: white;
@@ -302,15 +320,18 @@ class PrincipalController(QMainWindow):
             QPushButton:hover { background-color: #C2185B; }
         """)
 
-        def abrir():
-            row = lista.currentRow()
-            if row >= 0 and row < len(proyectos):
-                dialogo.accept()
-                self.mostrar_vista_proyecto(proyectos[row])
+        # guardamos referencia a self para usar en la funcion
+        controlador = self
 
-        btn_abrir.clicked.connect(abrir)
+        def abrir():
+            fila = lista.currentRow()
+            if fila >= 0 and fila < len(proyectos):
+                dialogo.accept()
+                controlador.mostrar_vista_proyecto(proyectos[fila])
+
+        boton_abrir.clicked.connect(abrir)
         lista.itemDoubleClicked.connect(abrir)
-        layout.addWidget(btn_abrir)
+        layout.addWidget(boton_abrir)
 
         dialogo.exec_()
 
@@ -321,18 +342,18 @@ class PrincipalController(QMainWindow):
         self.label_subtitle.hide()
         self.bottomBar.hide()
 
-        if self.vista_actual:
+        if self.vista_actual is not None:
             self.vista_actual.deleteLater()
 
-        self.vista_actual = ProyectoController(proyecto, self.datos, self.mostrar_inicio)
+        self.vista_actual = ControladorProyecto(proyecto, self.datos, self.mostrar_inicio)
         self.centralwidget.layout().addWidget(self.vista_actual)
 
     def mostrar_admin(self):
         """muestra panel de administracion (solo admin)"""
-        if not self.admin:
+        if not self.es_admin:
             return
         self.resaltar_boton(self.btn_calendar)
-        dialogo = AdminController(self.datos)
+        dialogo = ControladorAdmin(self.datos)
         dialogo.exec_()
         self.cargar_tareas_inicio()
 
@@ -344,19 +365,19 @@ class PrincipalController(QMainWindow):
         self.label_subtitle.hide()
         self.bottomBar.hide()
 
-        if self.vista_actual:
+        if self.vista_actual is not None:
             self.vista_actual.deleteLater()
 
-        self.vista_actual = PapeleraController(self.datos, self.mostrar_inicio)
+        self.vista_actual = ControladorPapelera(self.datos, self.mostrar_inicio)
         self.centralwidget.layout().addWidget(self.vista_actual)
 
     def mostrar_ajustes(self):
         """muestra ajustes"""
-        dialogo = AjustesController(self.usuario, self.datos)
+        dialogo = ControladorAjustes(self.usuario, self.datos)
         if dialogo.exec_() == QDialog.Accepted:
             if dialogo.cerrar_sesion:
                 self.close()
-                self.on_logout()
+                self.funcion_logout()
 
     def ir_a_proyectos(self):
         """va a la seccion de proyectos"""
@@ -365,9 +386,9 @@ class PrincipalController(QMainWindow):
     def resaltar_boton(self, activo):
         """resalta el boton activo"""
         botones = [self.btn_home, self.btn_board, self.btn_calendar, self.btn_settings]
-        for btn in botones:
-            if btn == activo:
-                btn.setStyleSheet("""
+        for boton in botones:
+            if boton == activo:
+                boton.setStyleSheet("""
                     background-color: #FCE4EC;
                     color: #D81B60;
                     border-radius: 10px;
@@ -377,7 +398,7 @@ class PrincipalController(QMainWindow):
                     font-weight: bold;
                 """)
             else:
-                btn.setStyleSheet("""
+                boton.setStyleSheet("""
                     QPushButton {
                         background-color: transparent;
                         color: #666;

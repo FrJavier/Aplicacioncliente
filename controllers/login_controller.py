@@ -1,5 +1,5 @@
 """
-controller para la pantalla de login
+controlador para la pantalla de login
 """
 
 from PyQt5.QtWidgets import QDialog
@@ -7,7 +7,7 @@ from PyQt5 import uic
 from controllers.datos_controller import obtener_ruta_vista
 
 
-class LoginController(QDialog):
+class ControladorLogin(QDialog):
     """maneja la logica del login"""
 
     def __init__(self, datos):
@@ -25,7 +25,7 @@ class LoginController(QDialog):
         usuario = self.input_usuario.text().strip()
         password = self.input_password.text()
 
-        if not usuario or not password:
+        if usuario == "" or password == "":
             self.lbl_error.setText("Completa todos los campos")
             return
 

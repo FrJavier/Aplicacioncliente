@@ -1,5 +1,5 @@
 """
-controller para la vista de proyecto (tablero kanban)
+controlador para la vista de proyecto (tablero kanban)
 """
 
 from PyQt5.QtWidgets import QWidget, QDialog, QFrame, QVBoxLayout, QHBoxLayout, QLabel, QPushButton
@@ -7,11 +7,11 @@ from PyQt5.QtCore import Qt
 from PyQt5 import uic
 from controllers.datos_controller import (
     obtener_ruta_vista, obtener_tareas_proyecto, crear_tarea,
-    cambiar_estado_tarea, eliminar_tarea, guardar_datos
+    cambiar_estado_tarea, eliminar_tarea
 )
 
 
-class NuevaTareaController(QDialog):
+class ControladorNuevaTarea(QDialog):
     """dialogo para crear nueva tarea con prioridad"""
 
     def __init__(self):
@@ -21,24 +21,24 @@ class NuevaTareaController(QDialog):
         self.comboPrioridad.setCurrentIndex(1)
 
     def obtener_datos(self):
-        """retorna titulo y prioridad seleccionados"""
+        """devuelve titulo y prioridad seleccionados"""
         titulo = self.inputTitulo.text().strip()
         prioridad = self.comboPrioridad.currentText().lower()
         return titulo, prioridad
 
 
-class ProyectoController(QWidget):
+class ControladorProyecto(QWidget):
     """maneja el tablero kanban de un proyecto"""
 
-    def __init__(self, proyecto, datos, on_volver):
+    def __init__(self, proyecto, datos, funcion_volver):
         super().__init__()
         uic.loadUi(obtener_ruta_vista("proyecto.ui"), self)
         self.proyecto = proyecto
         self.datos = datos
-        self.on_volver = on_volver
+        self.funcion_volver = funcion_volver
 
         # actualiza titulo
-        self.lblProjectTitle.setText(f"✨ {proyecto['nombre']}")
+        self.lblProjectTitle.setText("Proyecto: " + proyecto["nombre"])
 
         # conecta botones
         self.btnExit.clicked.connect(self.volver)
@@ -49,7 +49,7 @@ class ProyectoController(QWidget):
 
     def volver(self):
         """vuelve a la pantalla principal"""
-        self.on_volver()
+        self.funcion_volver()
 
     def cargar_tareas(self):
         """carga las tareas en las columnas"""
@@ -75,36 +75,39 @@ class ProyectoController(QWidget):
     def limpiar_columna(self, layout):
         """elimina solo los widgets QFrame (tareas) de la columna"""
         # recorre de atras hacia adelante para evitar problemas de indices
-        for i in range(layout.count() - 1, -1, -1):
+        i = layout.count() - 1
+        while i >= 0:
             item = layout.itemAt(i)
-            if item and item.widget():
+            if item is not None and item.widget() is not None:
                 widget = item.widget()
                 # solo elimina si es un QFrame (las tareas)
                 if isinstance(widget, QFrame):
                     layout.takeAt(i)
                     widget.deleteLater()
+            i = i - 1
 
     def crear_widget_tarea(self, tarea):
         """crea widget visual para una tarea"""
-        # guarda el id para evitar problemas con lambda
+        # guarda el id
         tarea_id = tarea.get("id")
 
         # colores segun prioridad
         colores = {"alta": "#FF5252", "media": "#FFD740", "baja": "#69F0AE"}
-        color = colores.get(tarea.get("prioridad", "media"), "#FFD740")
+        prioridad = tarea.get("prioridad", "media")
+        color = colores.get(prioridad, "#FFD740")
 
         frame = QFrame()
         frame.setMinimumHeight(70)
-        frame.setStyleSheet(f"""
-            QFrame {{
+        frame.setStyleSheet("""
+            QFrame {
                 background-color: white;
                 border-radius: 8px;
-                border-left: 5px solid {color};
+                border-left: 5px solid """ + color + """;
                 border-right: 1px solid #FCE4EC;
                 border-top: 1px solid #FCE4EC;
                 border-bottom: 1px solid #FCE4EC;
-            }}
-            QFrame:hover {{ background-color: #FFF5F7; }}
+            }
+            QFrame:hover { background-color: #FFF5F7; }
         """)
 
         layout = QVBoxLayout(frame)
@@ -112,25 +115,25 @@ class ProyectoController(QWidget):
         layout.setSpacing(5)
 
         # titulo
-        lbl_titulo = QLabel(tarea.get("titulo", "Sin titulo"))
-        lbl_titulo.setStyleSheet("font-weight: bold; color: #333;")
-        lbl_titulo.setWordWrap(True)
+        etiqueta_titulo = QLabel(tarea.get("titulo", "Sin titulo"))
+        etiqueta_titulo.setStyleSheet("font-weight: bold; color: #333;")
+        etiqueta_titulo.setWordWrap(True)
 
         # botones
-        btn_layout = QHBoxLayout()
+        layout_botones = QHBoxLayout()
         estado = tarea.get("estado", "pendiente")
 
         if estado == "pendiente":
-            btn_accion = QPushButton("Iniciar")
-            btn_accion.clicked.connect(lambda checked, tid=tarea_id: self.mover_tarea(tid, "en_curso"))
+            boton_accion = QPushButton("Iniciar")
+            boton_accion.clicked.connect(self.crear_funcion_mover(tarea_id, "en_curso"))
         elif estado == "en_curso":
-            btn_accion = QPushButton("Completar")
-            btn_accion.clicked.connect(lambda checked, tid=tarea_id: self.mover_tarea(tid, "completada"))
+            boton_accion = QPushButton("Completar")
+            boton_accion.clicked.connect(self.crear_funcion_mover(tarea_id, "completada"))
         else:
-            btn_accion = None
+            boton_accion = None
 
-        if btn_accion:
-            btn_accion.setStyleSheet("""
+        if boton_accion is not None:
+            boton_accion.setStyleSheet("""
                 QPushButton {
                     background-color: #D81B60;
                     color: white;
@@ -140,10 +143,10 @@ class ProyectoController(QWidget):
                 }
                 QPushButton:hover { background-color: #C2185B; }
             """)
-            btn_layout.addWidget(btn_accion)
+            layout_botones.addWidget(boton_accion)
 
-        btn_eliminar = QPushButton("Eliminar")
-        btn_eliminar.setStyleSheet("""
+        boton_eliminar = QPushButton("Eliminar")
+        boton_eliminar.setStyleSheet("""
             QPushButton {
                 background-color: transparent;
                 color: #999;
@@ -153,15 +156,27 @@ class ProyectoController(QWidget):
             }
             QPushButton:hover { color: #D32F2F; }
         """)
-        btn_eliminar.clicked.connect(lambda checked, tid=tarea_id: self.borrar_tarea(tid))
+        boton_eliminar.clicked.connect(self.crear_funcion_borrar(tarea_id))
 
-        btn_layout.addWidget(btn_eliminar)
-        btn_layout.addStretch()
+        layout_botones.addWidget(boton_eliminar)
+        layout_botones.addStretch()
 
-        layout.addWidget(lbl_titulo)
-        layout.addLayout(btn_layout)
+        layout.addWidget(etiqueta_titulo)
+        layout.addLayout(layout_botones)
 
         return frame
+
+    def crear_funcion_mover(self, tarea_id, nuevo_estado):
+        """crea una funcion para mover una tarea a un estado"""
+        def funcion():
+            self.mover_tarea(tarea_id, nuevo_estado)
+        return funcion
+
+    def crear_funcion_borrar(self, tarea_id):
+        """crea una funcion para borrar una tarea"""
+        def funcion():
+            self.borrar_tarea(tarea_id)
+        return funcion
 
     def mover_tarea(self, tarea_id, nuevo_estado):
         """cambia el estado de una tarea"""
@@ -175,9 +190,9 @@ class ProyectoController(QWidget):
 
     def agregar_tarea(self):
         """abre dialogo para crear tarea"""
-        dialogo = NuevaTareaController()
+        dialogo = ControladorNuevaTarea()
         if dialogo.exec_() == QDialog.Accepted:
             titulo, prioridad = dialogo.obtener_datos()
-            if titulo:
+            if titulo != "":
                 crear_tarea(self.datos, titulo, self.proyecto.get("id"), prioridad)
                 self.cargar_tareas()
