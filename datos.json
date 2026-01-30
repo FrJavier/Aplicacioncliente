@@ -19,7 +19,8 @@
       "participantes": []
     }
   ],
-  "tareas": [
+  "tareas": [],
+  "papelera": [
     {
       "id": 1,
       "titulo": "d",
@@ -27,7 +28,14 @@
       "proyecto_nombre": "f",
       "estado": "completada",
       "prioridad": "alta"
+    },
+    {
+      "id": 2,
+      "titulo": "eqwd",
+      "proyecto_id": 1,
+      "proyecto_nombre": "f",
+      "estado": "completada",
+      "prioridad": "media"
     }
-  ],
-  "papelera": []
+  ]
 }
