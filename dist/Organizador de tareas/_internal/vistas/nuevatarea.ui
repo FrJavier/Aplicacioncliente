@@ -1,0 +1,227 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ui version="4.0">
+ <class>NuevaTareaDialog</class>
+ <widget class="QDialog" name="NuevaTareaDialog">
+  <property name="geometry">
+   <rect>
+    <x>0</x>
+    <y>0</y>
+    <width>400</width>
+    <height>280</height>
+   </rect>
+  </property>
+  <property name="windowTitle">
+   <string>Nueva Tarea</string>
+  </property>
+  <property name="styleSheet">
+   <string notr="true">QDialog {
+    background-color: #FFF0F5;
+}</string>
+  </property>
+  <layout class="QVBoxLayout" name="mainLayout">
+   <property name="spacing">
+    <number>15</number>
+   </property>
+   <property name="leftMargin">
+    <number>25</number>
+   </property>
+   <property name="topMargin">
+    <number>25</number>
+   </property>
+   <property name="rightMargin">
+    <number>25</number>
+   </property>
+   <property name="bottomMargin">
+    <number>25</number>
+   </property>
+   <item>
+    <widget class="QLabel" name="lblTitulo">
+     <property name="font">
+      <font>
+       <family>Segoe UI</family>
+       <pointsize>14</pointsize>
+       <weight>75</weight>
+       <bold>true</bold>
+      </font>
+     </property>
+     <property name="styleSheet">
+      <string notr="true">color: #D81B60;</string>
+     </property>
+     <property name="text">
+      <string>Nueva Tarea</string>
+     </property>
+     <property name="alignment">
+      <set>Qt::AlignCenter</set>
+     </property>
+    </widget>
+   </item>
+   <item>
+    <widget class="QLabel" name="lblNombre">
+     <property name="styleSheet">
+      <string notr="true">font-weight: bold; color: #555;</string>
+     </property>
+     <property name="text">
+      <string>Titulo:</string>
+     </property>
+    </widget>
+   </item>
+   <item>
+    <widget class="QLineEdit" name="inputTitulo">
+     <property name="minimumSize">
+      <size>
+       <width>0</width>
+       <height>40</height>
+      </size>
+     </property>
+     <property name="styleSheet">
+      <string notr="true">
+QLineEdit {
+    border: 1px solid #E0E0E0;
+    border-radius: 10px;
+    padding-left: 15px;
+    background-color: white;
+}
+QLineEdit:focus { border: 1px solid #D81B60; }
+      </string>
+     </property>
+     <property name="placeholderText">
+      <string>Escribe el titulo de la tarea...</string>
+     </property>
+    </widget>
+   </item>
+   <item>
+    <widget class="QLabel" name="lblPrioridad">
+     <property name="styleSheet">
+      <string notr="true">font-weight: bold; color: #555;</string>
+     </property>
+     <property name="text">
+      <string>Prioridad:</string>
+     </property>
+    </widget>
+   </item>
+   <item>
+    <widget class="QComboBox" name="comboPrioridad">
+     <property name="minimumSize">
+      <size>
+       <width>0</width>
+       <height>40</height>
+      </size>
+     </property>
+     <property name="styleSheet">
+      <string notr="true">
+QComboBox {
+    border: 1px solid #E0E0E0;
+    border-radius: 10px;
+    padding-left: 15px;
+    background-color: white;
+    color: #333;
+}
+QComboBox QAbstractItemView {
+    background-color: white;
+    color: #333;
+    selection-background-color: #FCE4EC;
+    selection-color: #D81B60;
+}
+      </string>
+     </property>
+     <item>
+      <property name="text">
+       <string>Alta</string>
+      </property>
+     </item>
+     <item>
+      <property name="text">
+       <string>Media</string>
+      </property>
+     </item>
+     <item>
+      <property name="text">
+       <string>Baja</string>
+      </property>
+     </item>
+    </widget>
+   </item>
+   <item>
+    <layout class="QHBoxLayout" name="layoutBotones">
+     <item>
+      <spacer name="spacer">
+       <property name="orientation">
+        <enum>Qt::Horizontal</enum>
+       </property>
+      </spacer>
+     </item>
+     <item>
+      <widget class="QPushButton" name="btnCancelar">
+       <property name="minimumSize">
+        <size>
+         <width>100</width>
+         <height>40</height>
+        </size>
+       </property>
+       <property name="styleSheet">
+        <string notr="true">
+QPushButton {
+    background-color: transparent;
+    color: #666;
+    border-radius: 20px;
+}
+QPushButton:hover { background-color: #F0F0F0; }
+        </string>
+       </property>
+       <property name="text">
+        <string>Cancelar</string>
+       </property>
+      </widget>
+     </item>
+     <item>
+      <widget class="QPushButton" name="btnCrear">
+       <property name="minimumSize">
+        <size>
+         <width>100</width>
+         <height>40</height>
+        </size>
+       </property>
+       <property name="styleSheet">
+        <string notr="true">
+QPushButton {
+    background-color: #D81B60;
+    color: white;
+    border-radius: 20px;
+    font-weight: bold;
+}
+QPushButton:hover { background-color: #C2185B; }
+        </string>
+       </property>
+       <property name="text">
+        <string>Crear</string>
+       </property>
+      </widget>
+     </item>
+    </layout>
+   </item>
+  </layout>
+ </widget>
+ <resources/>
+ <connections>
+  <connection>
+   <sender>btnCancelar</sender>
+   <signal>clicked()</signal>
+   <receiver>NuevaTareaDialog</receiver>
+   <slot>reject()</slot>
+   <hints>
+    <hint type="sourcelabel"><x>200</x><y>250</y></hint>
+    <hint type="destinationlabel"><x>200</x><y>140</y></hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>btnCrear</sender>
+   <signal>clicked()</signal>
+   <receiver>NuevaTareaDialog</receiver>
+   <slot>accept()</slot>
+   <hints>
+    <hint type="sourcelabel"><x>320</x><y>250</y></hint>
+    <hint type="destinationlabel"><x>200</x><y>140</y></hint>
+   </hints>
+  </connection>
+ </connections>
+</ui>

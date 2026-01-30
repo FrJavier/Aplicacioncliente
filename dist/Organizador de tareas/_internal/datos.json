@@ -1,0 +1,69 @@
+{
+  "usuarios": {
+    "admin": {
+      "password": "admin123",
+      "rol": "admin",
+      "nombre": "Administrador"
+    },
+    "Pepe": {
+      "password": "123",
+      "rol": "user",
+      "nombre": "Jose Manuel Martinez Belando"
+    },
+    "Carlos": {
+      "password": "123",
+      "rol": "user",
+      "nombre": "Carlos Garcia Lorente"
+    },
+    "Antonio": {
+      "password": "123",
+      "rol": "admin",
+      "nombre": "Antonio Salinas Garcia"
+    }
+  },
+  "proyectos": [
+    {
+      "id": 1,
+      "nombre": "Proyecto Prueba",
+      "descripcion": "Esto es una descripcion de prueba",
+      "participantes": [
+        "Pepe"
+      ]
+    }
+  ],
+  "tareas": [
+    {
+      "id": 1,
+      "titulo": "Reunion Inicial",
+      "proyecto_id": 1,
+      "proyecto_nombre": "Proyecto Prueba",
+      "estado": "en_curso",
+      "prioridad": "alta"
+    },
+    {
+      "id": 2,
+      "titulo": "Crear Proyecto",
+      "proyecto_id": 1,
+      "proyecto_nombre": "Proyecto Prueba",
+      "estado": "pendiente",
+      "prioridad": "baja"
+    },
+    {
+      "id": 3,
+      "titulo": "Limpiar Cache",
+      "proyecto_id": 1,
+      "proyecto_nombre": "Proyecto Prueba",
+      "estado": "completada",
+      "prioridad": "media"
+    },
+    {
+      "id": 4,
+      "titulo": "Hacer cafe",
+      "proyecto_id": 1,
+      "proyecto_nombre": "Proyecto Prueba",
+      "estado": "en_curso",
+      "prioridad": "alta"
+    }
+  ],
+  "papelera": []
+}

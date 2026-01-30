@@ -1,6 +1,4 @@
 """
-MyPlanner - Aplicacion de gestion de tareas estilo Trello
-
 Credenciales admin:
     Usuario: admin
     Contrasena: admin123

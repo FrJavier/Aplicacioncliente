@@ -1,0 +1,554 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ui version="4.0">
+ <class>AdminDialog</class>
+ <widget class="QDialog" name="AdminDialog">
+  <property name="geometry">
+   <rect>
+    <x>0</x>
+    <y>0</y>
+    <width>800</width>
+    <height>550</height>
+   </rect>
+  </property>
+  <property name="windowTitle">
+   <string>Panel de Administracion</string>
+  </property>
+  <property name="styleSheet">
+   <string notr="true">QDialog {
+    background-color: #FFF0F5;
+}</string>
+  </property>
+  <layout class="QVBoxLayout" name="mainLayout">
+   <property name="spacing">
+    <number>15</number>
+   </property>
+   <property name="leftMargin">
+    <number>25</number>
+   </property>
+   <property name="topMargin">
+    <number>25</number>
+   </property>
+   <property name="rightMargin">
+    <number>25</number>
+   </property>
+   <property name="bottomMargin">
+    <number>25</number>
+   </property>
+   <item>
+    <widget class="QLabel" name="lblTitulo">
+     <property name="font">
+      <font>
+       <family>Segoe UI</family>
+       <pointsize>18</pointsize>
+       <weight>75</weight>
+       <bold>true</bold>
+      </font>
+     </property>
+     <property name="styleSheet">
+      <string notr="true">color: #D81B60;</string>
+     </property>
+     <property name="text">
+      <string>Panel de Administracion</string>
+     </property>
+     <property name="alignment">
+      <set>Qt::AlignCenter</set>
+     </property>
+    </widget>
+   </item>
+   <item>
+    <widget class="QTabWidget" name="tabWidget">
+     <property name="styleSheet">
+      <string notr="true">
+QTabWidget::pane {
+    border: 1px solid #FCE4EC;
+    border-radius: 10px;
+    background-color: white;
+}
+QTabBar::tab {
+    background-color: #FCE4EC;
+    color: #666;
+    padding: 10px 20px;
+    margin-right: 5px;
+    border-top-left-radius: 10px;
+    border-top-right-radius: 10px;
+}
+QTabBar::tab:selected {
+    background-color: white;
+    color: #D81B60;
+    font-weight: bold;
+}
+      </string>
+     </property>
+     <property name="currentIndex">
+      <number>0</number>
+     </property>
+     <widget class="QWidget" name="tabUsuarios">
+      <attribute name="title">
+       <string>Usuarios</string>
+      </attribute>
+      <layout class="QVBoxLayout" name="layoutUsuarios">
+       <property name="spacing">
+        <number>10</number>
+       </property>
+       <property name="leftMargin">
+        <number>15</number>
+       </property>
+       <property name="topMargin">
+        <number>15</number>
+       </property>
+       <property name="rightMargin">
+        <number>15</number>
+       </property>
+       <property name="bottomMargin">
+        <number>15</number>
+       </property>
+       <item>
+        <widget class="QListWidget" name="listaUsuarios">
+         <property name="styleSheet">
+          <string notr="true">
+QListWidget {
+    border: 1px solid #FCE4EC;
+    border-radius: 8px;
+    background-color: #FAFAFA;
+}
+QListWidget::item {
+    padding: 10px;
+    border-bottom: 1px solid #F0F0F0;
+}
+QListWidget::item:selected {
+    background-color: #FCE4EC;
+    color: #D81B60;
+}
+          </string>
+         </property>
+        </widget>
+       </item>
+       <item>
+        <layout class="QHBoxLayout" name="layoutBtnUsuarios">
+         <item>
+          <widget class="QPushButton" name="btnNuevoUsuario">
+           <property name="minimumSize">
+            <size>
+             <width>0</width>
+             <height>40</height>
+            </size>
+           </property>
+           <property name="styleSheet">
+            <string notr="true">
+QPushButton {
+    background-color: #D81B60;
+    color: white;
+    border-radius: 20px;
+    padding: 0 20px;
+    font-weight: bold;
+}
+QPushButton:hover { background-color: #C2185B; }
+            </string>
+           </property>
+           <property name="text">
+            <string>+ Nuevo Usuario</string>
+           </property>
+          </widget>
+         </item>
+         <item>
+          <widget class="QPushButton" name="btnEliminarUsuario">
+           <property name="minimumSize">
+            <size>
+             <width>0</width>
+             <height>40</height>
+            </size>
+           </property>
+           <property name="styleSheet">
+            <string notr="true">
+QPushButton {
+    background-color: transparent;
+    color: #666;
+    border: 1px solid #CCC;
+    border-radius: 20px;
+    padding: 0 20px;
+}
+QPushButton:hover { color: #D32F2F; border-color: #D32F2F; }
+            </string>
+           </property>
+           <property name="text">
+            <string>Eliminar Usuario</string>
+           </property>
+          </widget>
+         </item>
+         <item>
+          <widget class="QPushButton" name="btnHacerAdmin">
+           <property name="minimumSize">
+            <size>
+             <width>0</width>
+             <height>40</height>
+            </size>
+           </property>
+           <property name="styleSheet">
+            <string notr="true">
+QPushButton {
+    background-color: transparent;
+    color: #666;
+    border: 1px solid #CCC;
+    border-radius: 20px;
+    padding: 0 20px;
+}
+QPushButton:hover { color: #D81B60; border-color: #D81B60; }
+            </string>
+           </property>
+           <property name="text">
+            <string>Cambiar Rol</string>
+           </property>
+          </widget>
+         </item>
+         <item>
+          <spacer name="spacerUsuarios">
+           <property name="orientation">
+            <enum>Qt::Horizontal</enum>
+           </property>
+          </spacer>
+         </item>
+        </layout>
+       </item>
+      </layout>
+     </widget>
+     <widget class="QWidget" name="tabProyectos">
+      <attribute name="title">
+       <string>Proyectos</string>
+      </attribute>
+      <layout class="QVBoxLayout" name="layoutProyectos">
+       <property name="spacing">
+        <number>10</number>
+       </property>
+       <property name="leftMargin">
+        <number>15</number>
+       </property>
+       <property name="topMargin">
+        <number>15</number>
+       </property>
+       <property name="rightMargin">
+        <number>15</number>
+       </property>
+       <property name="bottomMargin">
+        <number>15</number>
+       </property>
+       <item>
+        <widget class="QListWidget" name="listaProyectos">
+         <property name="styleSheet">
+          <string notr="true">
+QListWidget {
+    border: 1px solid #FCE4EC;
+    border-radius: 8px;
+    background-color: #FAFAFA;
+}
+QListWidget::item {
+    padding: 10px;
+    border-bottom: 1px solid #F0F0F0;
+}
+QListWidget::item:selected {
+    background-color: #FCE4EC;
+    color: #D81B60;
+}
+          </string>
+         </property>
+        </widget>
+       </item>
+       <item>
+        <layout class="QHBoxLayout" name="layoutBtnProyectos">
+         <item>
+          <widget class="QPushButton" name="btnNuevoProyecto">
+           <property name="minimumSize">
+            <size>
+             <width>0</width>
+             <height>40</height>
+            </size>
+           </property>
+           <property name="styleSheet">
+            <string notr="true">
+QPushButton {
+    background-color: #D81B60;
+    color: white;
+    border-radius: 20px;
+    padding: 0 20px;
+    font-weight: bold;
+}
+QPushButton:hover { background-color: #C2185B; }
+            </string>
+           </property>
+           <property name="text">
+            <string>+ Nuevo Proyecto</string>
+           </property>
+          </widget>
+         </item>
+         <item>
+          <widget class="QPushButton" name="btnEliminarProyecto">
+           <property name="minimumSize">
+            <size>
+             <width>0</width>
+             <height>40</height>
+            </size>
+           </property>
+           <property name="styleSheet">
+            <string notr="true">
+QPushButton {
+    background-color: transparent;
+    color: #666;
+    border: 1px solid #CCC;
+    border-radius: 20px;
+    padding: 0 20px;
+}
+QPushButton:hover { color: #D32F2F; border-color: #D32F2F; }
+            </string>
+           </property>
+           <property name="text">
+            <string>Eliminar Proyecto</string>
+           </property>
+          </widget>
+         </item>
+         <item>
+          <spacer name="spacerProyectos">
+           <property name="orientation">
+            <enum>Qt::Horizontal</enum>
+           </property>
+          </spacer>
+         </item>
+        </layout>
+       </item>
+      </layout>
+     </widget>
+     <widget class="QWidget" name="tabAsignar">
+      <attribute name="title">
+       <string>Asignar Usuarios</string>
+      </attribute>
+      <layout class="QVBoxLayout" name="layoutAsignar">
+       <property name="spacing">
+        <number>10</number>
+       </property>
+       <property name="leftMargin">
+        <number>15</number>
+       </property>
+       <property name="topMargin">
+        <number>15</number>
+       </property>
+       <property name="rightMargin">
+        <number>15</number>
+       </property>
+       <property name="bottomMargin">
+        <number>15</number>
+       </property>
+       <item>
+        <layout class="QHBoxLayout" name="layoutCombos">
+         <item>
+          <layout class="QVBoxLayout" name="layoutComboProyecto">
+           <item>
+            <widget class="QLabel" name="lblProyecto">
+             <property name="text">
+              <string>Proyecto:</string>
+             </property>
+             <property name="styleSheet">
+              <string notr="true">font-weight: bold; color: #555;</string>
+             </property>
+            </widget>
+           </item>
+           <item>
+            <widget class="QComboBox" name="comboProyecto">
+             <property name="minimumSize">
+              <size>
+               <width>0</width>
+               <height>40</height>
+              </size>
+             </property>
+             <property name="styleSheet">
+              <string notr="true">
+QComboBox {
+    border: 1px solid #E0E0E0;
+    border-radius: 10px;
+    padding-left: 10px;
+    background-color: white;
+    color: #333;
+}
+QComboBox QAbstractItemView {
+    background-color: white;
+    color: #333;
+    selection-background-color: #FCE4EC;
+    selection-color: #D81B60;
+}
+              </string>
+             </property>
+            </widget>
+           </item>
+          </layout>
+         </item>
+         <item>
+          <layout class="QVBoxLayout" name="layoutComboUsuario">
+           <item>
+            <widget class="QLabel" name="lblUsuario">
+             <property name="text">
+              <string>Usuario:</string>
+             </property>
+             <property name="styleSheet">
+              <string notr="true">font-weight: bold; color: #555;</string>
+             </property>
+            </widget>
+           </item>
+           <item>
+            <widget class="QComboBox" name="comboUsuario">
+             <property name="minimumSize">
+              <size>
+               <width>0</width>
+               <height>40</height>
+              </size>
+             </property>
+             <property name="styleSheet">
+              <string notr="true">
+QComboBox {
+    border: 1px solid #E0E0E0;
+    border-radius: 10px;
+    padding-left: 10px;
+    background-color: white;
+    color: #333;
+}
+QComboBox QAbstractItemView {
+    background-color: white;
+    color: #333;
+    selection-background-color: #FCE4EC;
+    selection-color: #D81B60;
+}
+              </string>
+             </property>
+            </widget>
+           </item>
+          </layout>
+         </item>
+        </layout>
+       </item>
+       <item>
+        <layout class="QHBoxLayout" name="layoutBtnAsignar">
+         <item>
+          <widget class="QPushButton" name="btnAsignar">
+           <property name="minimumSize">
+            <size>
+             <width>0</width>
+             <height>40</height>
+            </size>
+           </property>
+           <property name="styleSheet">
+            <string notr="true">
+QPushButton {
+    background-color: #D81B60;
+    color: white;
+    border-radius: 20px;
+    padding: 0 20px;
+    font-weight: bold;
+}
+QPushButton:hover { background-color: #C2185B; }
+            </string>
+           </property>
+           <property name="text">
+            <string>Asignar a Proyecto</string>
+           </property>
+          </widget>
+         </item>
+         <item>
+          <widget class="QPushButton" name="btnDesasignar">
+           <property name="minimumSize">
+            <size>
+             <width>0</width>
+             <height>40</height>
+            </size>
+           </property>
+           <property name="styleSheet">
+            <string notr="true">
+QPushButton {
+    background-color: transparent;
+    color: #666;
+    border: 1px solid #CCC;
+    border-radius: 20px;
+    padding: 0 20px;
+}
+QPushButton:hover { color: #D32F2F; border-color: #D32F2F; }
+            </string>
+           </property>
+           <property name="text">
+            <string>Quitar de Proyecto</string>
+           </property>
+          </widget>
+         </item>
+         <item>
+          <spacer name="spacerAsignar">
+           <property name="orientation">
+            <enum>Qt::Horizontal</enum>
+           </property>
+          </spacer>
+         </item>
+        </layout>
+       </item>
+       <item>
+        <widget class="QLabel" name="lblParticipantes">
+         <property name="text">
+          <string>Participantes del proyecto seleccionado:</string>
+         </property>
+         <property name="styleSheet">
+          <string notr="true">font-weight: bold; color: #555; margin-top: 10px;</string>
+         </property>
+        </widget>
+       </item>
+       <item>
+        <widget class="QListWidget" name="listaParticipantes">
+         <property name="styleSheet">
+          <string notr="true">
+QListWidget {
+    border: 1px solid #FCE4EC;
+    border-radius: 8px;
+    background-color: #FAFAFA;
+}
+QListWidget::item {
+    padding: 8px;
+    border-bottom: 1px solid #F0F0F0;
+}
+          </string>
+         </property>
+        </widget>
+       </item>
+      </layout>
+     </widget>
+    </widget>
+   </item>
+   <item>
+    <widget class="QPushButton" name="btnCerrar">
+     <property name="minimumSize">
+      <size>
+       <width>0</width>
+       <height>45</height>
+      </size>
+     </property>
+     <property name="styleSheet">
+      <string notr="true">
+QPushButton {
+    background-color: transparent;
+    color: #666;
+    border-radius: 22px;
+}
+QPushButton:hover { background-color: #F0F0F0; color: #333; }
+      </string>
+     </property>
+     <property name="text">
+      <string>Cerrar</string>
+     </property>
+    </widget>
+   </item>
+  </layout>
+ </widget>
+ <resources/>
+ <connections>
+  <connection>
+   <sender>btnCerrar</sender>
+   <signal>clicked()</signal>
+   <receiver>AdminDialog</receiver>
+   <slot>accept()</slot>
+   <hints>
+    <hint type="sourcelabel"><x>400</x><y>520</y></hint>
+    <hint type="destinationlabel"><x>400</x><y>275</y></hint>
+   </hints>
+  </connection>
+ </connections>
+</ui>

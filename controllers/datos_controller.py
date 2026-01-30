@@ -3,12 +3,24 @@ controlador para manejo de datos (json)
 """
 
 import os
+import sys
 import json
 
+
+def ruta_recurso(ruta_relativa):
+    """obtiene la ruta correcta para pyinstaller y desarrollo"""
+    try:
+        # pyinstaller crea una carpeta temporal
+        ruta_base = sys._MEIPASS
+    except Exception:
+        # en desarrollo usa la ruta actual
+        ruta_base = os.path.abspath(".")
+    return os.path.join(ruta_base, ruta_relativa)
+
+
 # rutas de archivos
-DIRECTORIO_BASE = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
-DIRECTORIO_VISTAS = os.path.join(DIRECTORIO_BASE, "vistas")
-ARCHIVO_DATOS = os.path.join(DIRECTORIO_BASE, "datos.json")
+DIRECTORIO_VISTAS = ruta_recurso("vistas")
+ARCHIVO_DATOS = ruta_recurso("datos.json")
 
 
 def obtener_ruta_vista(nombre):
